@@ -83,6 +83,11 @@ class ProductImagesTableSeeder extends Seeder
 
 
 
+
+
+
+                
+
             ]);
         }
     }

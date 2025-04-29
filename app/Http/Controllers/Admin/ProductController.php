@@ -18,9 +18,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::withoutTrashed()
+        $products = Product::withoutTrashed()//يقوم بإرجاع كل السجلات التي لم يتم حذفها.
             ->with(['category', 'sizes', 'colors', 'images','materials']) // eager load sizes, colors, and images
-            ->get();
+            ->get();// استرجاع كل النتائج
 
 
         return view('admin.products.index', compact('products'));

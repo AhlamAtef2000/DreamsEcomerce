@@ -4,7 +4,6 @@
 <div class="container-fluid">
     <h1 class="h3 mb-2 text-gray-800 mt-5">Orders</h1>
 
-
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -31,7 +30,7 @@
                         <tr>
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->user->name }}</td>
-                            <td>${{ $order->total_price }}</td>
+                            <td>JOD{{ $order->total_price }}</td>
                             <td>
                                 <span class="badge
                                     @if($order->status == 'pending') badge-primary
@@ -39,13 +38,20 @@
                                     @elseif($order->status == 'delivered') badge-info
                                     @elseif($order->status == 'cancelled') badge-danger
                                     @endif">
+                                    @if($order->status == 'pending') <i class="fa fa-hourglass-half"></i>
+                                    @elseif($order->status == 'shipped') <i class="fa fa-truck"></i>
+                                    @elseif($order->status == 'delivered') <i class="fa fa-check-circle"></i>
+                                    @elseif($order->status == 'cancelled') <i class="fa fa-times-circle"></i>
+                                    @endif
                                     {{ ucfirst($order->status) }}
                                 </span>
                             </td>
 
-                                                        <td>{{ $order->shipping_address }}</td>
+                            <td>{{ $order->shipping_address }}</td>
                             <td>
-                                <a href="{{ route('admin.orders.edit', $order) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{{ route('admin.orders.edit', $order) }}" class="btn btn-warning btn-sm">
+                                    <i class="fa fa-edit"></i> Edit
+                                </a>
                             </td>
                         </tr>
                         @endforeach

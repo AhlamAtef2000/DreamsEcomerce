@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -23,30 +24,7 @@ class UserController extends Controller
     return view('admin.user.edit', compact('user'));
 }
 
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'name'  => 'nullable|string|max:255',
-        'email' => 'nullable|email|max:255|unique:users,email,' . $id,
-        'role'  => 'required|in:admin,user',
-    ]);
 
-    $user = User::withTrashed()->findOrFail($id);
-
-    if ($request->filled('name')) {
-        $user->name = $request->name;
-    }
-
-    if ($request->filled('email')) {
-        $user->email = $request->email;
-    }
-
-    $user->role = $request->role;
-
-    $user->save();
-
-    return redirect()->route('admin.user.index')->with('success', 'User updated successfully!');
-}
 
 public function updateProfile(Request $request)
 {
@@ -63,22 +41,36 @@ public function updateProfile(Request $request)
         $rules['password'] = 'string|min:6|confirmed';
     }
 
-
+    // Validate the request data
     $request->validate($rules);
 
+    // Update user fields
     $user->name = $request->name;
     $user->email = $request->email;
 
-    if ($request->filled('password')) {
-        $user->password = \Hash::make($request->password);
+    // Handle the profile image upload if provided
+    if ($request->hasFile('profile_image')) {
+        // Delete old profile image if it exists
+        if ($user->profile_image) {
+            Storage::delete('public/' . $user->profile_image);
+        }
+
+        // Store the new image and save the path
+        $imagePath = $request->file('profile_image')->store('profile_admin_images', 'public');
+        $user->profile_image = $imagePath;
     }
 
+    // Handle password update if provided
+    if ($request->filled('password')) {
+        $user->password = Hash::make($request->password);
+    }
 
+    // Save the updated user record
     $user->save();
 
+    // Redirect with success message
     return redirect()->route('admin.profile')->with('success', 'Profile updated successfully!');
 }
-
 public function profile()
 {
     $user = Auth::user();

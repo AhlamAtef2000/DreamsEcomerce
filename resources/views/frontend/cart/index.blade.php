@@ -137,9 +137,10 @@
     @csrf
     <input type="hidden" id="quantity_no" name="quantity_no" >
     <input type="hidden" id="cart_item_id" name="cart_item_id" >
-
+    <input type="hidden" id="color_id" value="{{$cartItem->color_id}}" name="color_id" >
+    <input type="hidden" id="size_id" value="{{$cartItem->size_id}}" name="size_id" >
+    <input type="hidden" id="material_id" value="{{$cartItem->material_id}}" name="material_id" >
     <button type="submit" class="btn btn-dark btn-hover-primary rounded-0 w-100">
-
         Proceed To Checkout
     </button>
 </form>
@@ -165,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const quantity = parseInt(quantityInput.value);
         const subtotalElement = itemRow.querySelector('.pro-subtotal .subtotal');
         const newSubtotal = (price * quantity).toFixed(2);
-        subtotalElement.textContent = `$${newSubtotal}`;
+        subtotalElement.textContent = `JOD${newSubtotal}`;
     };
 
     const updateCartTotal = () => {
@@ -186,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const cartTotalElement = document.getElementById('cart-total');
         if (cartTotalElement) {
-            cartTotalElement.textContent = `$${(total + shipping).toFixed(2)}`;
+            cartTotalElement.textContent = `JOD${(total + shipping).toFixed(2)}`;
         }
     };
 

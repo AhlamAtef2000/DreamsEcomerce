@@ -4,7 +4,9 @@
 
 <div class="container-fluid">
     <h1 class="h3 mb-2 text-gray-800 mt-5">Sizes</h1>
-    <a href="{{ route('admin.sizes.create') }}" class="btn btn-primary  mb-4 icon mb-4 "> <i class="fa fa-plus mr-2"></i>Add Size</a>
+    <a href="{{ route('admin.sizes.create') }}" class="btn btn-primary  mb-4 icon mb-4 "> 
+        <i class="fa fa-plus mr-2"></i>Add Size
+    </a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -30,11 +32,18 @@
                                 <td>{{ $size->id }}</td>
                                 <td>{{ $size->name }}</td>
                                 <td>
-                                    <a href="{{ route('admin.sizes.edit', $size) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <!-- Edit Icon -->
+                                    <a href="{{ route('admin.sizes.edit', $size) }}" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    <!-- Delete Icon -->
                                     <form action="{{ route('admin.sizes.destroy', $size) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

@@ -15,7 +15,7 @@ class ShopController extends Controller
     $perPage = $request->input('show', 24);
     $sortBy = $request->input('sort_by', 'default');
     $search = $request->input('search'); 
-    // نبدأ بالاستعلام على المنتجات
+
     $products = Product::with('images');
 
     if ($search) {

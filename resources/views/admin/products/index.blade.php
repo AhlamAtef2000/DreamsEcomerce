@@ -32,12 +32,11 @@
                             <th>Price</th>
                             <th>Stock</th>
                             <th>On Sale</th>
-                            <th>Sizes</th>
+                            {{-- <th>Sizes</th>
                             <th>Colors</th>
-                            <th>Material</th>
+                            <th>Material</th> --}}
                             <th>Discount (%)</th>
                             <th>Sale Ends At</th>
-
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -48,15 +47,12 @@
                                 <td>{{ $product->id }}</td>
                                 <td>
                                     @foreach($product->images as $image)
-
-                                        <img src="{{ asset('storage/'.$image->image_path) }}" width="50">
-
+                                        <img src="{{ asset('storage/'.$image->image_path) }}" width="50" class="rounded shadow-sm">
                                     @endforeach
-
                                 </td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->category->name }}</td>
-                                <td>${{ $product->price }}</td>
+                                <td>JOD {{ number_format($product->price, 2) }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>
                                     @if ($product->is_on_sale)
@@ -65,7 +61,7 @@
                                         <span class="badge bg-danger text-white">No</span>
                                     @endif
                                 </td>
-                                <td>
+                                {{-- <td>
                                     @foreach ($product->sizes as $size)
                                         <span class="badge bg-info text-white">{{ $size->name }}</span>
                                     @endforeach
@@ -77,22 +73,35 @@
                                 </td>
 
                                 <td>
-                                    @foreach ($product->materials  as $material)
-                                        <span >{{ $material->name }} |</span>
+                                    @foreach ($product->materials as $material)
+                                        <span>{{ $material->name }} |</span>
                                     @endforeach
-                                </td>
+                                </td> --}}
 
                                 <td>{{ $product->discount_percentage ?? '—' }}</td>
-<td>{{ $product->sale_end_date ? \Carbon\Carbon::parse($product->sale_end_date)->format('Y-m-d H:i') : '—' }}</td>
+                                <td>{{ $product->sale_end_date ? \Carbon\Carbon::parse($product->sale_end_date)->format('Y-m-d H:i') : '—' }}</td>
 
                                 <td>
-                                    <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <!-- Edit Icon -->
+                                    <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-warning btn-sm shadow-sm" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                
+                                    <!-- View Icon -->
+                                    <a href="{{ route('admin.products.show', $product) }}" class="btn btn-info btn-sm shadow-sm" title="View">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                
+                                    <!-- Delete Icon -->
                                     <form action="{{ route('admin.products.destroy', $product) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm shadow-sm" onclick="return confirm('Are you sure?')" title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </form>
                                 </td>
+                                
                             </tr>
                         @endforeach
                     </tbody>
@@ -104,3 +113,66 @@
 </div>
 
 @endsection
+
+@push('styles')
+<style>
+    /* Style for table rows on hover */
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Style for badges */
+    .badge {
+        font-size: 14px;
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    /* Style for buttons */
+    .btn {
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Styling for images */
+    img {
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Card styling */
+    .card {
+        border-radius: 15px;
+    }
+
+    .card-header {
+        background-color: #f8f9fc;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+
+    /* Styling for the icons */
+    .fa {
+        font-size: 18px;
+    }
+
+    .btn-warning .fa-edit {
+        color: #fff;
+    }
+
+    .btn-danger .fa-trash {
+        color: #fff;
+    }
+</style>
+@endpush

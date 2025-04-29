@@ -45,7 +45,7 @@ class ProductSeeder extends Seeder
             'stock' => 80,
             'is_on_sale' => 1,
             'status_id' => 1,
-            'discount_percentage' => 20, // خصم 20%
+            'discount_percentage' => null, // خصم 20%
             'sale_end_date' => now()->addDays(7), // ينتهي بعد 7 أيام
         ]);
 
@@ -59,7 +59,7 @@ class ProductSeeder extends Seeder
             'stock' => 150,
             'is_on_sale' => 1,
             'status_id' => 1,
-            'discount_percentage' => 20, // خصم 20%
+            'discount_percentage' => null, // خصم 20%
             'sale_end_date' => now()->addDays(7), // ينتهي بعد 7 أيام
         ]);
 
@@ -71,19 +71,19 @@ class ProductSeeder extends Seeder
             'stock' => 120,
             'is_on_sale' => 0,
             'status_id' => 1,
-            'discount_percentage' => 20, // خصم 20%
+            'discount_percentage' => null, // خصم 20%
             'sale_end_date' => now()->addDays(7), // ينتهي بعد 7 أيام
         ]);
 
         Product::create([
             'category_id' => 3, // Kids
             'name' => 'Kids Sports jeans',
-            'description' => 'Comfortable jeans for kids .',
+            'description' => 'Comfortable and stylish jeans for kids  .',
             'price' => 19.99,
             'stock' => 200,
             'is_on_sale' => 1,
             'status_id' => 1,
-            'discount_percentage' => 20, // خصم 20%
+            'discount_percentage' => null, // خصم 20%
             'sale_end_date' => now()->addDays(7), // ينتهي بعد 7 أيام
         ]);
 
@@ -102,12 +102,12 @@ class ProductSeeder extends Seeder
         Product::create([
             'category_id' => 2, // Women
             'name' => 'Women Casual Top',
-            'description' => 'Relaxed and stylish casual top.',
+            'description' => 'Relaxed and stylish casual top for women.',
             'price' => 22.50,
             'stock' => 90,
             'is_on_sale' => 1,
             'status_id' => 1,
-            'discount_percentage' => 20, // خصم 20%
+            'discount_percentage' => null, // خصم 20%
             'sale_end_date' => now()->addDays(7), // ينتهي بعد 7 أيام
         ]);
 

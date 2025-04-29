@@ -1,52 +1,70 @@
-@extends('layouts.admin')
+@extends('dashboard.layout')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <h2>{{ $product->name }}</h2>
-            <p><strong>Description:</strong> {{ $product->description }}</p>
-            <p><strong>Price:</strong> ${{ number_format($product->price, 2) }}</p>
-            <p><strong>Stock:</strong> {{ $product->stock }}</p>
-            <p><strong>Category:</strong> {{ $product->category->name }}</p>
+@section('contentBody')
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Product Details</h1>
 
-            <h4>Sizes</h4>
-            <ul>
-                @foreach($product->sizes as $size)
-                    <li>{{ $size->name }}</li>
-                @endforeach
-            </ul>
+        <div class="product-details">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow-sm p-4">
+                        <h3 class="text-primary">{{ $product->name }}</h3>
+                        <p><strong>Description:</strong> {{ $product->description }}</p>
+                        <p><strong>Price:</strong> <span class="text-success">JOD {{ number_format($product->price, 2) }}</span></p>
+                        <p><strong>Stock:</strong> {{ $product->stock }}</p>
+                        <p><strong>Category:</strong> {{ $product->category->name }}</p>
 
-            <h4>Colors</h4>
-            <ul>
-                @foreach($product->colors as $color)
-                    <li>{{ $color->name }}</li>
-                @endforeach
-            </ul>
+                        <div class="mt-3">
+                            <p><strong>Sizes:</strong></p>
+                            <ul>
+                                @foreach($product->sizes as $size)
+                                    <li>{{ $size->name }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
 
-            <h4>Materials</h4>
-            <ul>
-                @foreach($product->materials as $material)
-                    <li>{{ $material->name }}</li>
-                @endforeach
-            </ul>
+                        <div class="mt-3">
+                            <p><strong>Colors:</strong></p>
+                            <ul>
+                                @foreach($product->colors as $color)
+                                    <li>{{ $color->name }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
 
-            @if ($product->is_on_sale)
-                <p><strong>Discount:</strong> {{ $product->discount_percentage }}% off</p>
-                <p><strong>Sale End Date:</strong> {{ $product->sale_end_date->format('Y-m-d') }}</p>
-            @endif
-        </div>
+                        <div class="mt-3">
+                            <p><strong>Materials:</strong></p>
+                            <ul>
+                                @foreach($product->materials as $material)
+                                    <li>{{ $material->name }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
 
-        <div class="col-md-4">
-            <h4>Product Images</h4>
-            @foreach($product->images as $image)
-                <img src="{{ Storage::url($image->image_path) }}" alt="{{ $product->name }}" class="img-fluid mb-2" />
-            @endforeach
+                        <p><strong>Discount:</strong> <span class="text-danger">{{ $product->discount_percentage }}%</span></p>
+
+                        @if($product->is_on_sale)
+                            <p><strong>Sale End Date:</strong> <span class="text-warning">{{ $product->sale_end_date }}</span></p>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h4 class="text-center mb-3">Product Images</h4>
+                    <div class="product-images text-center">
+                        @foreach($product->images as $image)
+                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="Product Image" class="img-fluid mb-3 shadow-sm rounded" width="200" />
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <a href="{{ route('admin.products.index') }}" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+            </div>
+            
         </div>
     </div>
-
-    <div class="mt-4">
-        <a href="{{ route('admin.products.index') }}" class="btn btn-primary">Back to Products</a>
-    </div>
-</div>
 @endsection

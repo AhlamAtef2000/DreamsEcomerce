@@ -309,15 +309,7 @@
                                                         </a>
 
                                                         </a>
-                                                        <div class="actions">
-                                                            <form action="{{ route('user.favorites.store') }}"
-                                                                method="POST" style="display: inline;">
-                                                                @csrf
-                                                                <input type="hidden" name="product_id"
-                                                                    value="{{ $newArrival->id }}" />
-
-                                                            </form>
-                                                        </div>
+                                                      
                                                     </div>
                                                     <div class="content">
                                                         <h4 class="sub-title">
@@ -352,61 +344,25 @@
                                                         </span>
 
                                                         <!-- View Item Form -->
-                                                        <form method="POST" action="{{ route('user.cart.store') }}"
+                                                        <form method="POST" action="{{ route('user.favorites.store',) }}"
                                                             class="variant-form mt-2">
                                                             @csrf
                                                             <input type="hidden" name="product_id"
                                                                 value="{{ $newArrival->id }}">
+                                                             
                                                             <input type="hidden" name="color_id" class="selected-color">
                                                             <input type="hidden" name="size_id" class="selected-size">
                                                             <input type="hidden" name="material_id"
                                                                 class="selected-material">
 
-                                                            <!-- Colors -->
-                                                            {{-- @if ($newArrival->colors && $newArrival->colors->count())
-                                                                <div class="mb-1">
-                                                                    <label class="form-label small mb-1 d-block">Color:</label>
-                                                                    @foreach ($newArrival->colors as $color)
-                                                                        <span class="badge bg-light text-dark border select-option cursor-pointer me-1 mb-1"
-                                                                            data-type="color" data-id="{{ $color->id }}">
-                                                                            {{ $color->name }}
-                                                                        </span>
-                                                                    @endforeach
-                                                                </div>
-                                                            @endif --}}
-
-                                                            <!-- Sizes -->
-                                                            {{-- @if ($newArrival->sizes && $newArrival->sizes->count())
-                                                                <div class="mb-1">
-                                                                    <label class="form-label small mb-1 d-block">Size:</label>
-                                                                    @foreach ($newArrival->sizes as $size)
-                                                                        <span class="badge bg-light text-dark border select-option cursor-pointer me-1 mb-1"
-                                                                            data-type="size" data-id="{{ $size->id }}">
-                                                                            {{ $size->name }}
-                                                                        </span>
-                                                                    @endforeach
-                                                                </div>
-                                                            @endif --}}
-
-                                                            <!-- Materials -->
-                                                            {{-- @if ($newArrival->materials && $newArrival->materials->count())
-                                                                <div class="mb-2">
-                                                                    <label class="form-label small mb-1 d-block">Material:</label>
-                                                                    @foreach ($newArrival->materials as $material)
-                                                                        <span class="badge bg-light text-dark border select-option cursor-pointer me-1 mb-1"
-                                                                            data-type="material" data-id="{{ $material->id }}">
-                                                                            {{ $material->name }}
-                                                                        </span>
-                                                                    @endforeach
-                                                                </div>
-                                                            @endif --}}
+                                                          
 
                                                             <div class="shop-list-btn mt-3">
-                                                                <a href="{{ route('user.favorites.store',$newArrival->id) }}"
+                                                                <button type="submit" href="{{ route('user.favorites.store',$newArrival->id) }}"
                                                                     class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"
                                                                     title="Wishlist">
                                                                     <i class="fa fa-heart"></i>
-                                                                </a>
+                                                                </button>
                                                                 <a href="{{ route('user.single-product',$newArrival->id) }}" class="btn btn-sm btn-outline-dark btn-hover-primary"
                                                                     title="View Item">
                                                                     View Item
@@ -464,17 +420,7 @@
 
                                                         </a>
 
-                                                        <div class="actions">
-                                                            <form action="{{ route('user.favorites.store') }}"
-                                                                method="POST" style="display: inline;">
-                                                                @csrf
-                                                                <input type="hidden" name="product_id"
-                                                                    value="{{ $bestSeller->id }}" />
-
-                                                            </form>
-
-
-                                                        </div>
+                                                    
 
                                                     </div>
                                                     <div class="content">
@@ -512,16 +458,21 @@
 
 
                                                         <div class="shop-list-btn mt-3">
-                                                            <a href="{{ route('user.favorites.store',$bestSeller->id) }}"
+                                                            <form action="{{ route('user.favorites.store') }}"
+                                                                method="POST" style="display: inline;">
+                                                                @csrf
+                                                                <input type="hidden" name="product_id"
+                                                                    value="{{ $bestSeller->id }}" />
+                                                            <button type="submit" href="{{ route('user.favorites.store',$bestSeller->id) }}"
                                                                 class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"
                                                                 title="Wishlist">
                                                                 <i class="fa fa-heart"></i>
-                                                            </a>
+                                                            </button>
                                                             <a href="{{ route('user.single-product',$bestSeller->id) }}" class="btn btn-sm btn-outline-dark btn-hover-primary"
                                                                 title="View Item">
                                                                 View Item
                                                         </a>
-
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -573,17 +524,7 @@
 
                                                         </a>
 
-                                                        <div class="actions">
-                                                            <form action="{{ route('user.favorites.store') }}"
-                                                                method="POST" style="display: inline;">
-                                                                @csrf
-                                                                <input type="hidden" name="product_id"
-                                                                    value="{{ $saleItem->id }}" />
-
-                                                            </form>
-
-
-                                                        </div>
+                                                       
 
                                                     </div>
                                                     <div class="content">
@@ -616,15 +557,21 @@
                                                         </span>
 
                                                         <div class="shop-list-btn mt-3">
-                                                            <a href="{{ route('user.favorites.store',$saleItem->id) }}"
+                                                            <form action="{{ route('user.favorites.store') }}"
+                                                                method="POST" style="display: inline;">
+                                                                @csrf
+                                                                <input type="hidden" name="product_id"
+                                                                    value="{{ $saleItem->id }}" />
+                                                            <button type="submit" href="{{ route('user.favorites.store',$saleItem->id) }}"
                                                                 class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"
                                                                 title="Wishlist">
                                                                 <i class="fa fa-heart"></i>
-                                                            </a>
+                                                            </button>
                                                             <a href="{{ route('user.single-product',$saleItem->id) }}" class="btn btn-sm btn-outline-dark btn-hover-primary"
                                                                 title="View Item">
                                                                 View Item
                                                         </a>
+                                                            </form>
                                                         </div>
 
                                                     </div>
@@ -675,12 +622,12 @@
                             <h1 class="title">Daily Deals</h1>
                         </div>
                         <ul class="product-tab-nav nav mt-n3" data-aos="fade-left" data-aos-delay="300">
-                            <li class="nav-item"><a class="nav-link active mt-3" data-bs-toggle="tab"
-                                    href="#product-deal-new-arrivals">New Arrivals</a></li>
-                            <li class="nav-item"><a class="nav-link mt-3" data-bs-toggle="tab"
+                            {{-- <li class="nav-item"><a class="nav-link active mt-3" data-bs-toggle="tab"
+                                    href="#product-deal-new-arrivals">New Arrivals</a></li> --}}
+                            {{-- <li class="nav-item"><a class="nav-link mt-3" data-bs-toggle="tab"
                                     href="#product-deal-best-sellers">Best Sellers</a></li>
                             <li class="nav-item"><a class="nav-link mt-3" data-bs-toggle="tab"
-                                    href="#product-deal-sale-items">Sale Items</a></li>
+                                    href="#product-deal-sale-items">Sale Items</a></li> --}}
                         </ul>
                     </div>
                 </div>
@@ -697,45 +644,45 @@
                                 <div class="swiper-container">
                                     <div class="swiper-wrapper">
                                         <!-- Product Start -->
-                                        @foreach ($newArrivals as $newArrival)
+                                        @foreach ($dailyProducts as $dailyProduct)
                                             <div class="swiper-slide product-wrapper" data-aos="fade-right"
                                                 data-aos-delay="600">
                                                 <!-- Single Product Deal Start -->
                                                 <div class="product single-deal-product product-border-left">
                                                     <div class="thumb">
-                                                        <a href="{{ route('user.single-product', $newArrival->id) }}"
+                                                        <a href="{{ route('user.single-product', $dailyProduct->id) }}"
                                                             class="image">
-                                                            @if (isset($newArrival->images[0]->image_path))
-                                                                <img src="{{ asset('storage/' . $newArrival->images[0]->image_path) }}"
+                                                            @if (isset($dailyProduct->images[0]->image_path))
+                                                                <img src="{{ asset('storage/' . $dailyProduct->images[0]->image_path) }}"
                                                                     alt="Product" />
                                                             @endif
                                                         </a>
                                                         <span class="badges">
-                                                            @if ($newArrival->discount_percentage)
+                                                            @if ($dailyProduct->discount_percentage)
                                                                 <span
-                                                                    class="sale">-{{ $newArrival->discount_percentage }}%</span>
+                                                                    class="sale">-{{ $dailyProduct->discount_percentage }}%</span>
                                                             @endif
                                                         </span>
                                                     </div>
                                                     <div class="content">
                                                         <p class="inner-desc">Hurry Up! Offer Ends In:</p>
-                                                        @if ($newArrival->sale_end_date)
+                                                        @if ($dailyProduct->sale_end_date)
                                                             <div class="countdown-area">
                                                                 <div class="countdown-wrapper d-flex"
-                                                                    data-countdown="{{ $newArrival->sale_end_date }}">
+                                                                    data-countdown="{{ $dailyProduct->sale_end_date }}">
                                                                 </div>
                                                             </div>
                                                         @endif
                                                         <h4 class="sub-title"><a
-                                                                href="{{ route('user.single-product', $newArrival->id) }}">{{ $newArrival->name }}</a>
+                                                                href="{{ route('user.single-product', $dailyProduct->id) }}">{{ $dailyProduct->name }}</a>
                                                         </h4>
                                                         <h5 class="title"><a
-                                                                href="{{ route('user.single-product', $newArrival->id) }}">{{ $newArrival->description }}</a>
+                                                                href="{{ route('user.single-product', $dailyProduct->id) }}">{{ $dailyProduct->description }}</a>
                                                         </h5>
 
                                                         @php
                                                             $rating =
-                                                                optional($newArrival->reviews->first())->rating ?? 0;
+                                                                optional($dailyProduct->reviews->first())->rating ?? 0;
                                                         @endphp
 
                                                         <!-- Ratings with Gold Stars -->
@@ -753,22 +700,22 @@
 
                                                         <span class="price">
                                                             <span
-                                                                class="new">{{ number_format($newArrival->price, 2) }}
+                                                                class="new">{{ number_format($dailyProduct->price, 2) }}
                                                                 JOD</span>
-                                                            @if ($newArrival->discount_percentage)
+                                                            @if ($dailyProduct->discount_percentage)
                                                                 <span
-                                                                    class="old">{{ number_format($newArrival->price * (1 - $newArrival->discount_percentage / 100), 2) }}
+                                                                    class="old">{{ number_format($dailyProduct->price * (1 - $dailyProduct->discount_percentage / 100), 2) }}
                                                                     JOD</span>
                                                             @endif
                                                         </span>
 
                                                         <div class="shop-list-btn mt-3">
-                                                            <a href="{{ route('user.favorites.store',$newArrival->id) }}"
+                                                            <a href="{{ route('user.favorites.store',$dailyProduct->id) }}"
                                                                 class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"
                                                                 title="Wishlist">
                                                                 <i class="fa fa-heart"></i>
                                                             </a>
-                                                            <a href="{{ route('user.single-product',$newArrival->id) }}" class="btn btn-sm btn-outline-dark btn-hover-primary"
+                                                            <a href="{{ route('user.single-product',$dailyProduct->id) }}" class="btn btn-sm btn-outline-dark btn-hover-primary"
                                                                 title="View Item">
                                                                 View Item
                                                         </a>
@@ -797,7 +744,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="product-deal-best-sellers">
+                        {{-- <div class="tab-pane fade" id="product-deal-best-sellers">
                             <div class="product-deal-carousel">
                                 <div class="swiper-container">
                                     <div class="swiper-wrapper">
@@ -1005,7 +952,7 @@
                                     <!-- Next Previous Button End -->
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>

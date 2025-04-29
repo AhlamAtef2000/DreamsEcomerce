@@ -37,7 +37,7 @@
                 <!-- Section Title End -->
                 <!-- Contact Form Wrapper Start -->
                 <div class="contact-form-wrapper contact-form">
-                    <form action="{{ route('admin.contacts.store') }}" id="contact-form" method="post">
+                    <form action="{{ route('user.contacts.store') }}" id="contact-form" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -153,7 +153,7 @@
                         <!-- Single Contact Title Content Start -->
                         <div class="single-contact-title-content">
                             <h4 class="title">Support Overall</h4>
-                            <p class="desc-content"><a href="mailto:{{ $contactInfo->support_email }}">{{ $contactInfo->support_email }}</a> <br><a href="mailto:{{ $contactInfo->info_email }}">{{ $contactInfo->info_email }}</a></p>
+                            <p class="desc-content"><a href="mailto:{{$contactInfo->support_email }}">{{ $contactInfo->support_email }}</a> <br><a href="mailto:{{ $contactInfo->info_email }}">{{ $contactInfo->info_email }}</a></p>
                         </div>
                         <!-- Single Contact Title Content End -->
 
@@ -174,10 +174,9 @@
     <!-- Google Map Area Start -->
     <div class="google-map-area w-100">
         <iframe class="contact-map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52444.33544494922!2d35.8597!3d31.9637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1519edcd8c924d9b%3A0x10c8c59b4079e6a6!2sAmman%2C%20Jordan!5e0!3m2!1sen!2s!4v1611260188535!5m2!1sen!2s"></iframe>
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52993.38459687279!2d35.83844671773683!3d32.02150228865861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151bf54e3c1053f9%3A0x6e693ab1b990a1b0!2z2KfZhdi32YjYt9iz2KzZ2KfZhNiq2YTYqCDYr9mK!5e0!3m2!1sen!2s!4v1682612470320!5m2!1sen!2s"></iframe>
     </div>
-
-    <!-- Google Map Area Start -->
+    <!-- Google Map Area End -->
 </div>
 
 @endsection

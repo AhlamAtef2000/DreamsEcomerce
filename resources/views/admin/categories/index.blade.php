@@ -40,11 +40,17 @@
                                 <td>{{ $category->slug }}</td>
                                 <td>{{ $category->description }}</td>
                                 <td>
-                                    <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <!-- Edit and Delete Icons -->
+                                    <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-warning btn-sm shadow-sm" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
                                     <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm shadow-sm" onclick="return confirm('Are you sure?')" title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -58,3 +64,60 @@
 </div>
 
 @endsection
+
+@push('styles')
+<style>
+    /* Style for table rows on hover */
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Style for badges */
+    .badge {
+        font-size: 14px;
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    /* Style for buttons */
+    .btn {
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Card styling */
+    .card {
+        border-radius: 15px;
+    }
+
+    .card-header {
+        background-color: #f8f9fc;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+
+    /* Styling for the icons */
+    .fa {
+        font-size: 18px;
+    }
+
+    .btn-warning .fa-edit {
+        color: #fff;
+    }
+
+    .btn-danger .fa-trash {
+        color: #fff;
+    }
+</style>
+@endpush

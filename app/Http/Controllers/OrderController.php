@@ -6,11 +6,13 @@ use App\Models\Order;
 use App\Models\CartItem;
 use App\Models\Cart;
 use App\Models\OrderItem;
-
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\shipment;
+use App\Models\ShippingMethod;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -106,11 +108,28 @@ class OrderController extends Controller
                     'product_id' => $item->product_id,
                     'quantity' => $item->quantity,
                     'price' => $item->product->price,
+                    'size_id' => $item->size_id,
+                    'color_id' => $item->color_id,
+                    'material_id' => $item->material_id,
                 ]);
             }
 
             // Clear the cart
             CartItem::where('cart_id', $cart->id)->delete();
+            $shippmentMethod=ShippingMethod::find($request->shipping_method_id);
+            if ($shippmentMethod) {
+                $shippmentMethodCost = $shippmentMethod->price;
+            }
+           
+            shipment::create([
+                'order_id' => $order->id,
+                'shipping_address' => $request->address,
+                'shipping_method' => $request->shipping_method_id,
+                'shipping_cost' => $shippmentMethodCost ?? 0,
+                'tracking_number' => AdminOrderController::generateTrackingNumber(),
+                'shipment_status' => 'pending',
+            ]);
+            
 
             // Clear the coupon session after order is placed
             session()->forget(['coupon', 'discounted_total']);
@@ -130,14 +149,14 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        
         // Ensure the authenticated user only sees their own orders
         if ($order->user_id !== Auth::id()) {
             return redirect()->route('user.orders.index')->with('error', 'Unauthorized access.');
         }
 
         // Load the items related to this order along with product's color, size, and material
-        $order->load('items.product.colors', 'items.product.sizes', 'items.product.materials', 'shipment');
-
+        $order=$order->load('items.product.colors', 'items.product.sizes', 'items.product.materials', 'shipment');
         // Return the view with the order data
         return view('frontend.orders.show', compact('order'));
     }

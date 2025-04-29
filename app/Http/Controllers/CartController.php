@@ -119,9 +119,15 @@ class CartController extends Controller
         $request->validate([
             'cart_item_id' => 'required|exists:cart_items,id',
             'quantity_no' => 'required|integer|min:1',
+            'color_id' => 'required|exists:colors,id',
+            'size_id' => 'required|exists:sizes,id',
+            'material_id' => 'required|exists:materials,id',
         ]);
         $cartItem = CartItem::findOrFail($request->cart_item_id);
         $cartItem->quantity = $request->quantity_no;
+        $cartItem->color_id = $request->color_id;
+        $cartItem->size_id = $request->size_id;
+        $cartItem->material_id = $request->material_id;
         $cartItem->save();
         return redirect()->route('user.checkout');
     }

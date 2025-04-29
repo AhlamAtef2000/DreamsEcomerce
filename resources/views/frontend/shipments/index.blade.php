@@ -38,11 +38,7 @@
                         <td>{{ $shipment->shipping_method }}</td>
                         <td>
                             <!-- Delete Shipment Form -->
-                            <form action="{{ route('user.shipments.destroy', $shipment->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                          
 
                             <!-- Show Details Button -->
                             <a href="{{ route('user.shipments.show', $shipment->id) }}" class="btn btn-info btn-sm ms-2">Show Details</a>

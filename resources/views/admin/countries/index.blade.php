@@ -25,7 +25,6 @@
                     <tr>
                         <th>Country Name</th>
                         <th>Country Code</th>
-
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -34,19 +33,24 @@
                     <tr>
                         <td>{{ $country->name }}</td>
                         <td>{{ $country->code }}</td>
-
-                        <td>
-                            <a href="{{ route('admin.countries.edit', $country->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <td class="text-center">
+                            <a href="{{ route('admin.countries.edit', $country->id) }}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a>
                             <form action="{{ route('admin.countries.destroy', $country->id) }}" method="POST" style="display:inline;">
-                                @csrf @method('DELETE')
-                                <button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete</button>
+                                @csrf
+                                @method('DELETE')
+                                <button onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
                     @endforeach
+
                     @if($countries->isEmpty())
                     <tr>
-                        <td colspan="2" class="text-center text-muted">No countries found.</td>
+                        <td colspan="3" class="text-center text-muted">No countries found.</td>
                     </tr>
                     @endif
                 </tbody>

@@ -39,10 +39,10 @@
                 <td>{{ $order->created_at->format('Y-m-d H:i:s') }}</td>
             </tr>
 
-            <tr>
+            {{-- <tr>
                 <th>Tracking Number</th>
                 <td>{{ $order->shipment->tracking_number }}</td>
-            </tr>
+            </tr> --}}
         </table>
 
         <h3>Order Items</h3>
@@ -62,10 +62,10 @@
                     <tr>
                         <td>{{ $item->product->name }}</td>
                         <td>{{ $item->quantity }}</td>
-                        <td>${{ number_format($item->price, 2) }}</td>
-                        <td>{{ $item->products->colors->name ?? 'N/A' }}</td>
-                        <td>{{ $item->products->sizes->name ?? 'N/A' }}</td>
-                        <td>{{ $item->products->materials->name ?? 'N/A' }}</td>
+                        <td>JOD{{ number_format($item->price, 2) }}</td>
+                        <td>{{ $item->color->name  }}</td>
+                        <td>{{ $item->size->name  }}</td>
+                        <td>{{ $item->material->name }}</td>
                     </tr>
                 @endforeach
             </tbody>

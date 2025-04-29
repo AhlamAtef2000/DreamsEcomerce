@@ -17,7 +17,7 @@ class FeatureSeeder extends Seeder
                 [
                     'picture' => 'image1.jpg',
                     'title' => 'Free Shipping',
-                    'description' => 'Free shipping on all orders',
+                    'description' => 'Free shipping on  orders above 100 Jod',
                 ],
                 [
                     'picture' => 'image2.jpg',

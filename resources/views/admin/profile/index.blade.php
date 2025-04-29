@@ -29,9 +29,13 @@
                     <h4 class="mb-0">Edit Profile</h4>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.profile.update') }}">
+                    <form method="POST" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data">
                         @csrf
-
+                        @if($user->profile_image)
+                        <div class="mt-2  d-flex justify-content-center">
+                            <img src="{{ asset('storage/' . $user->profile_image) }}" alt="Profile Image" class="img-fluid rounded-circle" width="100">
+                        </div>
+                    @endif
                         <div class="mb-3">
                             <label class="form-label">Name</label>
                             <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -67,7 +71,14 @@
                             <label class="form-label">Role</label>
                             <input type="text" class="form-control" value="{{ $user->role }}" readonly>
                         </div>
-
+                        <div class="mb-3">
+                            <label class="form-label">Profile Image</label>
+                            <input name="profile_image" type="file" class="form-control @error('profile_image') is-invalid @enderror">
+                            @error('profile_image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                           
+                        </div>
                         <button type="submit" class="btn btn-success mt-2">Update Profile</button>
                     </form>
                 </div>

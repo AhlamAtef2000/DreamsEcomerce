@@ -35,11 +35,11 @@
             </tr>
             <tr>
                 <th>Shipped At</th>
-                <td>{{ $shipment->shipped_at ? $shipment->shipped_at->format('Y-m-d H:i:s') : 'Not Shipped' }}</td>
+                <td>{{ $shipment->shipped_at ? $shipment->shipped_at : 'Not Shipped' }}</td>
             </tr>
             <tr>
                 <th>Delivered At</th>
-                <td>{{ $shipment->delivered_at ? $shipment->delivered_at->format('Y-m-d H:i:s') : 'Not Delivered' }}</td>
+                <td>{{ $shipment->delivered_at ? $shipment->delivered_at : 'Not Delivered' }}</td>
             </tr>
         </table>
 

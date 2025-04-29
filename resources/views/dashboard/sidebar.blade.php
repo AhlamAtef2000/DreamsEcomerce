@@ -132,5 +132,13 @@
         </a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.contacts.index') }}">
+            <i class="fas fa-phone-alt"></i> <!-- Icon representing contact (phone) -->
+            <span>Contact</span>
+        </a>
+    </li>
+    
+
 
 </ul>

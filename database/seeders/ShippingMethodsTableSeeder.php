@@ -15,6 +15,7 @@ class ShippingMethodsTableSeeder extends Seeder
     {
         $usId = DB::table('countries')->where('code', 'US')->value('id');
         $egId = DB::table('countries')->where('code', 'EG')->value('id');
+        
 
         DB::table('shipping_methods')->insert([
             ['name' => 'standard', 'price' => 5.00, 'country_id' => $usId],

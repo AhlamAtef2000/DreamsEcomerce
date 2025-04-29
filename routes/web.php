@@ -26,7 +26,9 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\ShopController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactController as FrontEndContactController;
+use App\Http\Controllers\Admin\ContactController;
+
 use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CouponController;
@@ -80,13 +82,15 @@ Route::resource('colors', ColorController::class);
 Route::resource('sizes', SizeController::class);
 Route::resource('materials', MaterialController::class);
 Route::resource('statuses', StatusController::class);
-Route::resource('contacts', ContactController::class);
 Route::resource('contactInfo', ContactInfoController::class);
+Route::resource('contacts', ContactController::class);
+
 Route::resource('coupons', CouponController::class)->names('coupons');
 Route::resource('shippingMethods', ShippingMethodController::class);
 Route::resource('countries', CountryController::class);
 Route::get('/profile', [UserController::class, 'profile'])->name('profile')->middleware('role:admin');
 Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
+
 });
 
 
@@ -121,6 +125,7 @@ Route::post('/reviews/store', [FrontEndReviewController::class, 'store'])->name(
 Route::get('/user/review/{review}/edit', [FrontEndReviewController::class, 'edit'])->name('review.edit');
 Route::put('/user/reviews/{id}', [FrontEndReviewController::class, 'update'])->name('review.update');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::resource('contacts', FrontEndContactController::class);
 
 });
 });

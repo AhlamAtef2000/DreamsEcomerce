@@ -123,30 +123,47 @@
 
                             {{-- Authenticated User --}}
                             @if(Auth::check())
-                                <div class="dropdown me-2 d-none d-md-block" >
-                                    <button class="btn dropdown-toggle header-action-btn" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border: none;">
-                                        <i class="pe-7s-user"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                        @if(Auth::user()->role == 'user')
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('user.profile') }}">Profile</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('user.shipments.index') }}">My Shipments</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('user.orders.index') }}">My Orders</a>
-                                            </li>
-                                        @endif
+                            
+                            <div class="dropdown me-2 d-none d-md-block">
+                                <button class="btn dropdown-toggle header-action-btn" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border: none; padding: 0;">
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <!-- User Name -->
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small me-2 text-dark">{{ Auth::user()->name }}</span>
+                                        
+                                        <!-- Profile Image -->
+                                        <img class="img-profile rounded-circle" src="{{ asset('storage/') }}/{{ Auth::user()->profile_image }}" alt="Profile" style="width: 40px; height: 40px; object-fit: cover;">
+                                    </a>
+                                </button>
+                                
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-light rounded" aria-labelledby="userDropdown">
+                                    @if(Auth::user()->role == 'user')
                                         <li>
-                                            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                <button type="submit" class="dropdown-item" style="border: none; background: none;">Logout</button>
-                                            </form>
+                                            <a class="dropdown-item" href="{{ route('user.profile') }}">
+                                                <i class="fas fa-user me-2"></i> Profile
+                                            </a>
                                         </li>
-                                    </ul>
-                                </div>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('user.shipments.index') }}">
+                                                <i class="fas fa-box me-2"></i> My Shipments
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('user.orders.index') }}">
+                                                <i class="fas fa-cart-arrow-down me-2"></i> My Orders
+                                            </a>
+                                        </li>
+                                    @endif
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item text-danger" style="border: none; background: none;">
+                                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                            
                             @else
                                 <a href="{{ route('login') }}" class="header-action-btn d-none d-md-block me-2" title="login">
                                     <i class="pe-7s-user"></i>
@@ -368,7 +385,7 @@
                                             class="text-dark">{{ $cartItem->product->name }}</a>
                                     </h3>
                                     <span class="price">
-                                        <span class="new">${{ number_format($cartItem->product->price, 2) }}</span>
+                                        <span class="new">JOD{{ number_format($cartItem->product->price, 2) }}</span>
                                         <div class="cart-product-remove" style="width: 100%; text-align: right;">
                                             <form action="{{ route('user.cart.destroy', $cartItem->id) }}" method="POST"
                                                 style="display:inline-block;">

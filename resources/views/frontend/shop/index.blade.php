@@ -11,7 +11,7 @@
 
                     <!-- Shop Top Bar Left start -->
                     <div class="shop-top-bar-left mb-md-0 mb-2">
-                        <div class="shop-top-show">
+                        <div claass="shop-top-show">
                             <!-- Showing Dynamic Results -->
                             <span>Showing {{ $products->firstItem() }}–{{ $products->lastItem() }} of {{ $products->total() }} results</span>
                         </div>

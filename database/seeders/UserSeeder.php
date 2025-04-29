@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
                 'name' => 'John Doe',
                 'email' => 'john.doe@example.com',
                 'password' => bcrypt('password123'),
-                'role'=>'admin'
+                'role'=>'admin',
+                'profile_image' => 'path/to/image.jpg', // Adjust the path as needed
             ]);
 
     }

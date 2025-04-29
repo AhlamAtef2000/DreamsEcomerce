@@ -68,6 +68,7 @@ class FavouriteController extends Controller
      */
     public function store(Request $request)
     {
+        
         $productId = $request->input('product_id');
         $user = Auth::user();
         if (!$user->favoriteProducts()->where('product_id', $productId)->exists()) {

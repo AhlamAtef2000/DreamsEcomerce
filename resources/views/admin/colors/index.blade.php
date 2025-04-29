@@ -34,11 +34,18 @@
                                 <td>{{ $color->id }}</td>
                                 <td>{{ $color->name }}</td>
                                 <td>
-                                    <a href="{{ route('admin.colors.edit', $color->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <!-- Edit Icon -->
+                                    <a href="{{ route('admin.colors.edit', $color->id) }}" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    <!-- Delete Icon -->
                                     <form action="{{ route('admin.colors.destroy', $color->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

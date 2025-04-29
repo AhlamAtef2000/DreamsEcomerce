@@ -71,7 +71,7 @@ class OrderController extends Controller
 
     }
 
-    private function generateTrackingNumber()
+    public static function generateTrackingNumber()
     {
         do {
             $trackingNumber = strtoupper(Str::random(10));

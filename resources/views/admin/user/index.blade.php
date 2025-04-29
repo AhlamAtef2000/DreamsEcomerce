@@ -20,10 +20,9 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Role</th> {{-- Add this --}}
+                            <th>Role</th>
                             <th>Status</th>
                             <th>Action</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -41,11 +40,11 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <!-- Edit Icon -->
+                                <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-edit"></i>
+                                </a>
                             </td>
-
-
-
                         </tr>
                         @endforeach
                     </tbody>

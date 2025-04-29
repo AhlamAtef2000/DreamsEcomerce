@@ -316,7 +316,7 @@
 <tfoot>
     <tr>
         <th class="text-start">Cart Subtotal</th>
-        <td class="text-end">${{ number_format($subtotal, 2) }}</td>
+        <td class="text-end">JOD{{ number_format($subtotal, 2) }}</td>
         <input type="hidden" id="finalTotal" name="total_price"/>
     </tr>
 
@@ -325,20 +325,20 @@
             Coupon (<span id="coupon-code">{{ session('coupon.code') ?? 'none' }}</span>)
         </th>
         <td class="text-end text-success" style="flex-grow: 1;">
-            - $<strong id="discount-amount">{{ number_format($discount ?? 0, 2) }}</strong>
+            - JOD<strong id="discount-amount">{{ number_format($discount ?? 0, 2) }}</strong>
         </td>
     </tr>
 
     <tr class="shipping-row">
         <th class="text-start">Shipping</th>
-        <td class="text-end" id="shipping-cost">$0.00</td>
+        <td class="text-end" id="shipping-cost">JOD0.00</td>
     </tr>
 
 
 
     <tr>
         <th class="text-start">Order Total</th>
-        <td class="text-end"><strong id="order-total">${{ number_format($total, 2) }}</strong></td>
+        <td class="text-end"><strong id="order-total">JOD{{ number_format($total, 2) }}</strong></td>
     </tr>
 </tfoot>
 
@@ -352,9 +352,9 @@
                             <div class="payment-accordion">
                                 @php
                                     $methods = [
-                                        'bank' => 'Direct Bank Transfer',
-                                        'cheque' => 'Cheque Payment',
-                                        'paypal' => 'PayPal',
+                                        // 'bank' => 'Direct Bank Transfer',
+                                        // 'cheque' => 'Cheque Payment',
+                                        // 'paypal' => 'PayPal',
                                         'cod' => 'Cash on Delivery',
                                     ];
                                 @endphp
@@ -362,7 +362,7 @@
                                 @foreach ($methods as $value => $label)
                                     <div class="single-payment mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="payment_method" id="payment-{{ $value }}" value="{{ $value }}" {{ $loop->first ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="radio" name="payment_method" id="payment-{{ $value }}" value="{{ $value }}" >
                                             <label class="form-check-label fw-bold" for="payment-{{ $value }}">
                                                 {{ $label }}
                                             </label>
@@ -457,7 +457,7 @@
                         const option = document.createElement('option');
                         option.value = method.id;
                         option.setAttribute('data-price', method.price);
-                        option.textContent = `${method.name} - $${parseFloat(method.price).toFixed(2)}`;
+                        option.textContent = `${method.name} - JOD${parseFloat(method.price).toFixed(2)}`;
                         shippingMethodSelect.appendChild(option);
                     });
                 });
@@ -471,11 +471,11 @@
             const shippingPrice = parseFloat(selectedOption.dataset.price || 0);
 
             // Update shipping row
-            shippingCostEl.textContent = `$${shippingPrice.toFixed(2)}`;
+            shippingCostEl.textContent = `JOD${shippingPrice.toFixed(2)}`;
 
             // Calculate total and update
             const newTotal = subtotal - discount + shippingPrice;
-            orderTotalEl.textContent = `$${newTotal.toFixed(2)}`;
+            orderTotalEl.textContent = `JOD${newTotal.toFixed(2)}`;
 
             // Update hidden inputs
             if (shippingPriceInput) shippingPriceInput.value = shippingPrice;
@@ -596,7 +596,7 @@
         // Function to update total after coupon or shipping method change
         function updateTotal() {
             const newTotal = subtotal - discount + shippingPrice;
-            orderTotalEl.textContent = '$' + newTotal.toFixed(2);
+            orderTotalEl.textContent = 'JOD' + newTotal.toFixed(2);
             if (finalTotalInput) {
             finalTotalInput.value = newTotal.toFixed(2);
         }
@@ -608,7 +608,7 @@
             shippingPrice = parseFloat(selectedOption.dataset.price || 0);
 
             // Update shipping cost row
-            shippingCostEl.textContent = `$${shippingPrice.toFixed(2)}`;
+            shippingCostEl.textContent = `JOD${shippingPrice.toFixed(2)}`;
 
             // Recalculate total after changing shipping
             updateTotal();

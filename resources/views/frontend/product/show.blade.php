@@ -220,7 +220,7 @@
                     $editMode = isset($isEditing) && $isEditing && isset($review);
                 @endphp
 
-@if($hasDeliveredOrder)
+                    @if($hasDeliveredOrder)
 
                 {{-- Rating Form or Info --}}
                 <div class="rating_wrap mt-4">
@@ -245,9 +245,9 @@
                         <div class="row">
                             <div class="col-lg-12 col-custom">
                                 <form action="{{ $editMode ? route('user.review.update', $review->id) : route('user.review.store') }}"
-                                      method="POST"
-                                      class="comment-form-area"
-                                      onsubmit="return validateReviewForm()">
+                                                method="POST"
+                                                class="comment-form-area"
+                                                    onsubmit="return validateReviewForm()">
                                     @csrf
                                     @if($editMode)
                                         @method('PUT')

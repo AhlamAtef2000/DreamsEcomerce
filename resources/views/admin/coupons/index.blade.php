@@ -35,16 +35,26 @@
                         @foreach($coupons as $coupon)
                             <tr>
                                 <td>{{ $coupon->code }}</td>
-                                <td>{{ ucfirst($coupon->discount_type) }}</td>
-                                <td>${{ number_format($coupon->amount, 2) }}</td>
-                                <td>${{ $coupon->valid_from }}</td>
-                                <td>${{ $coupon->valid_until }}</td>
+                                <td>{{ ($coupon->discount_type) }}</td>
                                 <td>
-                                    <a href="{{ route('admin.coupons.edit', $coupon->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    @if($coupon->discount_type == 'percentage')
+                                        {{ $coupon->amount }}% <!-- عرض النسبة المئوية -->
+                                    @else
+                                        {{ number_format($coupon->amount, 2) }}  JOD <!-- عرض المبلغ الثابت -->
+                                    @endif
+                                </td>
+                                <td>{{ $coupon->valid_from }}</td>
+                                <td>{{ $coupon->valid_until }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('admin.coupons.edit', $coupon->id) }}" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
                                     <form action="{{ route('admin.coupons.destroy', $coupon->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

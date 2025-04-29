@@ -45,11 +45,18 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.features.edit', $feature) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <!-- Edit Icon -->
+                                    <a href="{{ route('admin.features.edit', $feature) }}" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    <!-- Delete Icon -->
                                     <form action="{{ route('admin.features.destroy', $feature) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

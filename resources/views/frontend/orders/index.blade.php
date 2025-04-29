@@ -32,7 +32,7 @@
                     <tr>
                         <td>{{ $order->id }}</td>
                         <td>{{ $order->status }}</td>
-                        <td>${{ number_format($order->total_price, 2) }}</td>
+                        <td>JOD{{ number_format($order->total_price, 2) }}</td>
                         <td>{{ $order->created_at->format('Y-m-d') }}</td>
                         <td>
                             <!-- Show Order Details Button -->

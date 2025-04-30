@@ -77,6 +77,7 @@ class FavouriteController extends Controller
         return redirect()->back()->with('message', 'Added to favorites.');
     }
 
+    
     /**
      * Display the specified resource.
      */

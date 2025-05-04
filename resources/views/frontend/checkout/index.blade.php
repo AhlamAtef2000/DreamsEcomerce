@@ -218,7 +218,7 @@
                         <h3 class="title">Billing Details</h3>
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <label>Country <span class="required">*</span></label>
+                                <label>City <span class="required">*</span></label>
                                 <select id="countrySelect" class="form-control" name="country" required>
                                     <option disabled selected>Loading countries...</option>
                                 </select>
@@ -227,7 +227,7 @@
                             <div class="col-md-12 mb-3">
                                 <label>Shipping Method <span class="required">*</span></label>
                                 <select id="shippingMethodSelect" class="form-control" name="shipping_method_id" required>
-                                    <option disabled selected>Select a country first</option>
+                                    <option disabled selected>Select a city first</option>
                                 </select>
                             </div>
 
@@ -251,7 +251,7 @@
                                 <input type="text" name="town_city" class="form-control" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label>State / County <span class="required">*</span></label>
+                                <label>State  <span class="required">*</span></label>
                                 <input type="text" name="state_county" class="form-control" required>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -624,6 +624,8 @@
             attachRemoveEvent(existingRemoveBtn);
         }
 
+
+        
 
     });
 </script>

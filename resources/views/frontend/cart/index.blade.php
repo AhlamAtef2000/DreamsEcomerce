@@ -116,10 +116,10 @@
         <!-- Cart Total Section -->
         @if(!$cartItems->isEmpty())
 
-        <div class="row">
-            <div class="col-lg-5 ms-auto col-custom">
-                <div class="cart-calculator-wrapper">
-                    <div class="cart-calculate-items">
+        <div class="row" >
+            <div class="col-lg-5 ms-auto col-custom" >
+                <div class="cart-calculator-wrapper" >
+                    <div class="cart-calculate-items" style="background-color: #F6EBE3;">
                         <h3 class="title">Cart Totals</h3>
                         <div class="table-responsive">
                             <table class="table">

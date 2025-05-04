@@ -242,6 +242,7 @@
         });
     });
 </script>
+@yield('scripts')
 
 
 

@@ -36,7 +36,7 @@
                             <th>Colors</th>
                             <th>Material</th> --}}
                             <th>Discount (%)</th>
-                            <th>Sale Ends At</th>
+                            {{-- <th>Sale Ends At</th> --}}
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -79,7 +79,7 @@
                                 </td> --}}
 
                                 <td>{{ $product->discount_percentage ?? '—' }}</td>
-                                <td>{{ $product->sale_end_date ? \Carbon\Carbon::parse($product->sale_end_date)->format('Y-m-d H:i') : '—' }}</td>
+                                {{-- <td>{{ $product->sale_end_date ? \Carbon\Carbon::parse($product->sale_end_date)->format('Y-m-d H:i') : '—' }}</td> --}}
 
                                 <td>
                                     <!-- Edit Icon -->

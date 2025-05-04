@@ -118,7 +118,7 @@
                     <!-- Header Menu End -->
 
                     <!-- Header Action Start -->
-                    <div class="col-xl-2 col-6 d-flex align-items-center">
+                    <div class="col-xl-2 col-6 d-flex align-items-center" >
                         <div class="header-actions d-flex align-items-center justify-content-end w-100">
 
                             {{-- Authenticated User --}}
@@ -128,11 +128,21 @@
                                 <button class="btn dropdown-toggle header-action-btn" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border: none; padding: 0;">
                                     <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <!-- User Name -->
-                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small me-2 text-dark">{{ Auth::user()->name }}</span>
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small me-2 text-dark" >
+                                            welcome back,
+                                            {{ Auth::user()->name }}</span>
                                         
                                         <!-- Profile Image -->
-                                        <img class="img-profile rounded-circle" src="{{ asset('storage/') }}/{{ Auth::user()->profile_image }}" alt="Profile" style="width: 40px; height: 40px; object-fit: cover;">
-                                    </a>
+                                        @if(Auth::user()->profile_image)
+                                        <img class="img-profile rounded-circle" 
+                                             src="{{ asset('storage/' . Auth::user()->profile_image) }}" 
+                                             alt="Profile" 
+                                             style="width: 40px; height: 40px; object-fit: cover;">
+                                    @else
+                                       
+                                    @endif
+                                    
+                                                                       </a>
                                 </button>
                                 
                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm border-light rounded" aria-labelledby="userDropdown">

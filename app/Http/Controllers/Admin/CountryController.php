@@ -33,7 +33,7 @@ class CountryController extends Controller
         ]);
 
         return redirect()->route('admin.countries.index')
-                         ->with('success', 'Country created successfully.');
+                            ->with('success', 'Country created successfully.');
     }
 
     public function edit(Country $country)
@@ -56,7 +56,7 @@ class CountryController extends Controller
         ]);
 
         return redirect()->route('admin.countries.index')
-                         ->with('success', 'Country updated successfully.');
+                            ->with('success', 'Country updated successfully.');
     }
 
     public function destroy($id)
@@ -65,12 +65,12 @@ class CountryController extends Controller
 
         if (!$country) {
             return redirect()->route('admin.countries.index')
-                             ->with('error', 'Country not found.');
+                                ->with('error', 'Country not found.');
         }
 
         $country->delete();
 
         return redirect()->route('admin.countries.index')
-                         ->with('success', 'Country deleted successfully.');
+                            ->with('success', 'Country deleted successfully.');
     }
 }

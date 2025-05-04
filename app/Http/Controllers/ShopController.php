@@ -5,43 +5,90 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 class ShopController extends Controller
 {
 
-
     public function index(Request $request)
-    {
+{
+    // Default values for pagination and sorting
+    $perPage = $request->input('show', 24); // Set the number of items per page
+    $sortBy = $request->input('sort_by', 'default'); // Default sorting
+    $search = $request->input('search'); // Search term from input
+    $categoryId = $request->input('category_id'); // Category ID
+    $productId = $request->input('product_id'); // Product ID
+    $colorId = $request->input('color_id'); // Color ID
+    $sizeId = $request->input('size_id'); // Size ID
+    $materialId = $request->input('material_id'); // Material ID
+
+    // Initialize the query for products with related images and reviews
+    $products = Product::with(['images', 'reviews']);
     
-    $perPage = $request->input('show', 24);
-    $sortBy = $request->input('sort_by', 'default');
-    $search = $request->input('search'); 
-
-    $products = Product::with('images');
-
+    // Filtering by search term (name)
     if ($search) {
-        $products = $products->where('name', 'like', '%' . $search . '%');
+        $products->where('name', 'like', '%' . $search . '%');
     }
 
-    if ($sortBy == '1') {
-        $products = $products->orderBy('created_at', 'desc');
-    } elseif ($sortBy == '2') {
-        $products = Product::leftJoin('reviews', 'products.id', '=', 'reviews.product_id')
-            ->selectRaw('products.id, products.name, products.description, products.price, products.category_id, AVG(reviews.rating) as avg_rating')
-            ->groupBy('products.id', 'products.name', 'products.description', 'products.price', 'products.category_id')
-            ->orderByDesc('avg_rating');
-    } elseif ($sortBy == '3') {
-        $products = $products->orderBy('created_at', 'desc');
-    } elseif ($sortBy == '4') {
-        $products = $products->orderBy('price', 'asc');
-    } elseif ($sortBy == '5') {
-        $products = $products->orderBy('price', 'desc');
+    // Filtering by category
+    if ($categoryId) {
+        $products->where('category_id', $categoryId);
     }
 
-    $products = $products->paginate($perPage)->appends($request->query()); 
+    // Filtering by specific product
+    if ($productId) {
+        $products->where('id', $productId);
+    }
+ 
 
-    return view('frontend.shop.index', compact('products'));
+    // Filter by relationships (color)
+    if ($colorId) {
+        $products->whereHas('colors', fn($q) => $q->where('colors.id', $colorId));
+    }
+
+    // Filter by relationships (size)
+    if ($sizeId) {
+        $products->whereHas('sizes', fn($q) => $q->where('sizes.id', $sizeId));
+    }
+
+    // Filter by relationships (material)
+    if ($materialId) {
+        $products->whereHas('materials', fn($q) => $q->where('materials.id', $materialId));
+    }
+
+    // Sorting options
+    switch ($sortBy) {
+        case '1': // Sort by newest
+            $products->orderBy('created_at', 'desc');
+            break;
+        case '2': // Sort by average rating
+            $products = Product::leftJoin('reviews', 'products.id', '=', 'reviews.product_id')
+                ->selectRaw('products.*, AVG(reviews.rating) as avg_rating')
+                ->groupBy('products.id')
+                ->orderByDesc('avg_rating');
+            break;
+        case '3': // Sort by price low to high
+            $products->orderBy('price', 'asc');
+            break;
+        case '4': // Sort by price high to low
+            $products->orderBy('price', 'desc');
+            break;
+        default:
+            break;
+    }
+
+    // Paginate the products with the requested perPage value
+    $products = $products->paginate($perPage)->appends($request->query());
+
+    // Get all categories for the filter dropdown
+    $categories = Category::all();
+
+    // Return the filtered products and categories to the view
+    return view('frontend.shop.index', compact('products', 'categories'));
 }
 
+    
+    
+    
 
 
 
@@ -92,4 +139,23 @@ class ShopController extends Controller
     {
         //
     }
+
+ 
+public function getCategoryProducts($categoryId)
+{
+    $products = Product::where('category_id', $categoryId)->get(['id', 'name']);
+    return response()->json(['products' => $products]);
+}
+
+public function getProductDetails($id)
+{
+    $product = Product::findOrFail($id);
+
+    return response()->json([
+        'colors' => $product->colors, // assuming it's an array or relation
+        'sizes' => $product->sizes,
+        'materials' => $product->materials,
+    ]);
+}
+
 }

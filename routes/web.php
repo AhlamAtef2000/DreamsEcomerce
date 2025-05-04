@@ -126,6 +126,9 @@ Route::get('/user/review/{review}/edit', [FrontEndReviewController::class, 'edit
 Route::put('/user/reviews/{id}', [FrontEndReviewController::class, 'update'])->name('review.update');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::resource('contacts', FrontEndContactController::class);
+Route::get('/product-details/{id}', [ShopController::class, 'getProductDetails'])->name('product.details.ajax');
+Route::get('/category-products/{categoryId}', [ShopController::class, 'getCategoryProducts']);
+
 
 });
 });

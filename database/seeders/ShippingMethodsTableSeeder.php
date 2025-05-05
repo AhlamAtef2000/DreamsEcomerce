@@ -13,8 +13,8 @@ class ShippingMethodsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $usId = DB::table('countries')->where('code', 'US')->value('id');
-        $egId = DB::table('countries')->where('code', 'EG')->value('id');
+        $usId = DB::table('countries')->where('code', 'AM')->value('id');
+        $egId = DB::table('countries')->where('code', 'IR')->value('id');
         
 
         DB::table('shipping_methods')->insert([

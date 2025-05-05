@@ -21,7 +21,7 @@ class OrderSeeder extends Seeder
         Order::create([
             'user_id' => $user->id,
             'total_price' => 99.99,
-            'status' => 'pending',
+            'status' => 'delivered',
             'shipping_address' => '123 Main St, Springfield, IL',
             'country' => 'USA',
             'first_name' => 'John',

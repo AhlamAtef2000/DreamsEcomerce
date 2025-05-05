@@ -37,19 +37,23 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(8)
             ->get();
-        $bestSellers = Product::with('reviews')
-            ->withCount(['orderItems' => function($query) {
-                $query->whereHas('order', function($query) {
+            $bestSellers = Product::with('reviews')
+            ->withCount(['orderItems as delivered_orders_count' => function ($query) {
+                $query->whereHas('order', function ($query) {
                     $query->where('status', 'delivered');
                 });
             }])
-            ->orderBy('order_items_count', 'desc')
+            ->having('delivered_orders_count', '>', 0)
+            ->orderBy('delivered_orders_count', 'desc')
             ->take(8)
             ->get();
+        
 
-        $saleItems = Product::with('reviews')->where('is_on_sale', true)
+            $saleItems = Product::with('reviews')
+            ->where('is_on_sale', true) // or use ->where('is_on_sale', 1)
             ->take(8)
             ->get();
+        
 
         $categoryWithProduct = Category::with(['products.images']) // nested eager loading
             ->take(8)

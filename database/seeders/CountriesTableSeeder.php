@@ -14,10 +14,20 @@ class CountriesTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('countries')->insert([
-            ['name' => 'United States', 'code' => 'US'],
-            ['name' => 'Egypt', 'code' => 'EG'],
-            ['name' => 'United Kingdom', 'code' => 'UK'],
-            ['name' => 'Germany', 'code' => 'DE'],
+            ['name' => 'Amman', 'code' => 'AM'],
+            ['name' => 'Irbid', 'code' => 'IR'],
+            ['name' => 'Zarqa', 'code' => 'ZA'],
+            ['name' => 'Aqaba', 'code' => 'AQ'],
+            ['name' => 'Mafraq', 'code' => 'MA'],
+            ['name' => 'Karak', 'code' => 'KA'],
+            ['name' => 'Madaba', 'code' => 'MD'],
+            ['name' => 'Tafilah', 'code' => 'TA'],
+            ['name' => 'Ma’an', 'code' => 'MN'],
+            ['name' => 'Balqa', 'code' => 'BA'],
+            ['name' => 'Jarash', 'code' => 'JA'],
+            ['name' => 'Ajloun', 'code' => 'AJ']
         ]);
+        
+        
     }
 }

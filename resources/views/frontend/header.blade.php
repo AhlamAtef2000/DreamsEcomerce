@@ -59,21 +59,21 @@
 
                 <!-- Header Top Message Start -->
                 <div class="col">
-                    <p class="header-top-message" style="font-size: 13px; text-align: left; font-weight: bold; padding:10px;">
-                    @if($coupon)
-                            Get
-                            @if($coupon->discount_type === 'percentage')
-                                {{ $coupon->amount }}% off
-                            @else
-                                {{ $coupon->amount }} JOD off
-                            @endif
-                            on any order!
-                            Enjoy limited time offer ({{ \Carbon\Carbon::parse($coupon->valid_until)->format('M d, Y') }}),
-
-                            @endif
-                            <a href="{{ route('user.shop') }}">Shop Now</a>
-                        </p>
+                    <p class="header-top-message" style="font-size: 13px; text-align: left; font-weight: bold; padding: 10px; display: flex; align-items: center; justify-content: space-between;">
+                        @if($coupon)
+                            <span>
+                                Get
+                                @if($coupon->discount_type === 'percentage')
+                                    {{ $coupon->amount }}% off 
+                                @else
+                                    {{ $coupon->amount }} JOD off
+                                @endif
+                            with code <span>{{ $coupon->code }}</span>({{ \Carbon\Carbon::parse($coupon->valid_until)->format('M d, Y') }}),
+                            </span>
+                        @endif
+                        <a href="{{ route('user.shop') }}">Shop Now</a>                    </p>
                 </div>
+                
 
                 <!-- Header Top Message End -->
 

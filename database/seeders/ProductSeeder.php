@@ -13,7 +13,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-      
+
 
         // 20 more products with different created_at days
         Product::create([
@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
             'price' => 38.00,
             'stock' => 80,
             'is_on_sale' => 1,
-            'status_id' => 1,
+            'status_id' => 1,               
             'discount_percentage' => 10,
             'sale_end_date' => now()->addDays(7),
             'created_at' => Carbon::now()->subDays(1),
@@ -148,8 +148,8 @@ class ProductSeeder extends Seeder
         
         Product::create([
             'category_id' => 3,
-            'name' => 'Kids Sandals',
-            'description' => 'Comfortable and breathable sandals.',
+            'name' => 'Kids coats', 
+            'description' => 'Comfortable and breathable coats.',
             'price' => 17.99,
             'stock' => 130,
             'is_on_sale' => 0,
@@ -226,8 +226,8 @@ class ProductSeeder extends Seeder
         
         Product::create([
             'category_id' => 3,
-            'name' => 'Kids Hat',
-            'description' => 'Protective sun hat.',
+            'name' => 'Kids tshirt',
+            'description' => 'Protective tshirt.',
             'price' => 9.99,
             'stock' => 200,
             'is_on_sale' => 0,
@@ -278,8 +278,8 @@ class ProductSeeder extends Seeder
 
 Product::create([
     'category_id' => 1,
-    'name' => 'Men Classic Leather Shoes',
-    'description' => 'Durable and stylish leather shoes for men.',
+    'name' => 'Men Classic Leather pants',
+    'description' => 'Durable and stylish leather pants for men.',
     'price' => 89.99,
     'stock' => 50,
     'is_on_sale' => 1,
@@ -317,7 +317,7 @@ Product::create([
 
 Product::create([
     'category_id' => 3,
-    'name' => 'Smart Fitness Watch',
+    'name' => 'kids pijamass',
     'description' => 'Track your steps, heart rate, and sleep easily.',
     'price' => 59.99,
     'stock' => 120,
@@ -329,17 +329,18 @@ Product::create([
 ]);
 
 Product::create([
-    'category_id' => 2,
-    'name' => 'Wireless Bluetooth Earbuds',
-    'description' => 'Crystal clear sound with noise isolation.',
-    'price' => 45.00,
+    'category_id' => 2, 
+    'name' => 'A-Line Skirt', 
+    'description' => 'Elegant A-line skirt, perfect for any occasion.', 
+    'price' => 45.00, 
     'stock' => 90,
-    'is_on_sale' => 1,
-    'status_id' => 1,
-    'discount_percentage' => null,
-    'sale_end_date' => now()->addDays(3),
-    'created_at' => Carbon::now()->subDays(5),
+    'is_on_sale' => 1, 
+    'status_id' => 1, 
+    'discount_percentage' => null, 
+    'sale_end_date' => now()->addDays(3), 
+    'created_at' => Carbon::now()->subDays(5), 
 ]);
+
 
 Product::create([
     'category_id' => 2,
@@ -366,44 +367,43 @@ Product::create([
     'sale_end_date' => now()->addDays(5),
     'created_at' => Carbon::now()->subDays(3),
 ]);
-
 Product::create([
-    'category_id' => 3,
-    'name' => 'Kids Sneakers',
-    'description' => 'Comfortable sneakers designed for active kids.',
-    'price' => 30.00,
+    'category_id' => 3, 
+    'name' => 'Kids Jeans',
+    'description' => 'Stylish and comfortable jeans designed for kids.',
+    'price' => 40.00, 
     'stock' => 75,
-    'is_on_sale' => 1,
-    'status_id' => 1,
+    'is_on_sale' => 1, 
+    'status_id' => 1, 
     'discount_percentage' => null,
     'sale_end_date' => now()->addDays(4),
-    'created_at' => Carbon::now()->subDays(1),
+    'created_at' => Carbon::now()->subDays(1), 
 ]);
 
 Product::create([
-    'category_id' => 3,
-    'name' => 'Noise Cancelling Headphones',
-    'description' => 'Immersive audio experience with noise cancellation.',
-    'price' => 110.00,
+    'category_id' => 1,
+    'name' => 'Sports Training Suit', 
+    'description' => 'High-performance training suit designed for athletes.', 
+    'price' => 110.00, 
     'stock' => 35,
-    'is_on_sale' => 1,
-    'status_id' => 1,
-    'discount_percentage' => null,
-    'sale_end_date' => now()->addDays(6),
-    'created_at' => Carbon::now()->subDays(2),
+    'is_on_sale' => 1, 
+    'status_id' => 1, 
+    'discount_percentage' => null, 
+    'sale_end_date' => now()->addDays(6), 
+    'created_at' => Carbon::now()->subDays(2), 
 ]);
-
 Product::create([
-    'category_id' => 2,
-    'name' => 'Portable Laptop Stand',
-    'description' => 'Ergonomic and adjustable laptop stand.',
-    'price' => 28.99,
-    'stock' => 60,
+    'category_id' => 2, 
+    'name' => 'Women\'s Sports Tracksuit', 
+    'description' => 'Stylish and comfortable sports tracksuit designed for women.', 
+    'price' => 28.99, 
+    'stock' => 60, 
     'is_on_sale' => 1,
-    'status_id' => 1,
+    'status_id' => 1, 
     'discount_percentage' => null,
-    'sale_end_date' => now()->addDays(3),
+    'sale_end_date' => now()->addDays(3), 
     'created_at' => Carbon::now()->subDays(1),
+
 ]);
 
     }

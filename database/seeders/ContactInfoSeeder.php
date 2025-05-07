@@ -14,11 +14,11 @@ class ContactInfoSeeder extends Seeder
     public function run(): void
     {
         ContactInfo::create([
-            'postal_address' => 'PO Box 123456, King Hussein Street, Amman, Jordan',  // Example address
-            'mobile' => '+962 7 1234 5678',  // Jordanian mobile number format
-            'fax' => '+962 6 567 8901',  // Example Jordanian fax number
+            'postal_address' => 'PO 11910, Hay abu Marhaf Str, Amman, Jordan',  // Example address
+            'mobile' => '+962 772150893',  // Jordanian mobile number format
+            'fax' => '+962 770717654',  // Example Jordanian fax number
             'support_email' => 'support24/7@jordanexample.com',  // Jordanian support email
-            'info_email' => 'info@jordanexample.com',  // Jordanian info email
+            'info_email' => 'khashashnehahlam@gmail.com', 
         ]);
     }
 }

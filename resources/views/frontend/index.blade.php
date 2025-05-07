@@ -99,12 +99,7 @@
                     <div class="header-top-lan dropdown">
                         <button class="dropdown-toggle" data-bs-toggle="dropdown">English <i
                                 class="fa fa-angle-down"></i></button>
-                        <!-- <ul class="dropdown-menu dropdown-menu-right animate slideIndropdown">
-                                        <li><a class="dropdown-item" href="#">English</a></li>
-                                        <li><a class="dropdown-item" href="#">Japanese</a></li>
-                                        <li><a class="dropdown-item" href="#">Arabic</a></li>
-                                        <li><a class="dropdown-item" href="#">Romanian</a></li>
-                                    </ul> -->
+
                     </div>
                     <div class="header-top-curr dropdown">
                         <button class="dropdown-toggle" data-bs-toggle="dropdown">Jod <i
@@ -129,15 +124,7 @@
                 </ul>
                 <!-- Contact Links End -->
 
-                <!-- Social Widget Start -->
-                <div class="widget-social">
-                    <a title="Facebook" href="#"><i class="fa fa-facebook-f"></i></a>
-                    <a title="Twitter" href="#"><i class="fa fa-twitter"></i></a>
-                    <a title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                    <a title="Youtube" href="#"><i class="fa fa-youtube"></i></a>
-                    <a title="Vimeo" href="#"><i class="fa fa-vimeo"></i></a>
-                </div>
-                <!-- Social Widget Ende -->
+
             </div>
             <!-- Contact Links/Social Links End -->
         </div>
@@ -622,12 +609,6 @@
                             <h1 class="title">Daily Deals</h1>
                         </div>
                         <ul class="product-tab-nav nav mt-n3" data-aos="fade-left" data-aos-delay="300">
-                            {{-- <li class="nav-item"><a class="nav-link active mt-3" data-bs-toggle="tab"
-                                    href="#product-deal-new-arrivals">New Arrivals</a></li> --}}
-                            {{-- <li class="nav-item"><a class="nav-link mt-3" data-bs-toggle="tab"
-                                    href="#product-deal-best-sellers">Best Sellers</a></li>
-                            <li class="nav-item"><a class="nav-link mt-3" data-bs-toggle="tab"
-                                    href="#product-deal-sale-items">Sale Items</a></li> --}}
                         </ul>
                     </div>
                 </div>

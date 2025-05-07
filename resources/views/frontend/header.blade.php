@@ -59,7 +59,7 @@
 
                 <!-- Header Top Message Start -->
                 <div class="col">
-                    <p class="header-top-message" style="font-size: 13px; text-align: left; font-weight: bold; padding: 10px; display: flex; align-items: center; justify-content: space-between;">
+                    <p class="header-top-message" style="font-size: 13px; text-align: left; font-weight: bold; padding:20px; display: flex; align-items: center; justify-content: space-between;">
                         @if($coupon)
                             <span>
                                 Get
@@ -68,7 +68,7 @@
                                 @else
                                     {{ $coupon->amount }} JOD off
                                 @endif
-                            with code <span>{{ $coupon->code }}</span>({{ \Carbon\Carbon::parse($coupon->valid_until)->format('M d, Y') }}),
+                            with code <span>{{ $coupon->code }}</span>({{ \Carbon\Carbon::parse($coupon->valid_until)->format('M d, Y') }})
                             </span>
                         @endif
                         <a href="{{ route('user.shop') }}">Shop Now</a>                    </p>
@@ -101,7 +101,7 @@
 
                     <!-- Header Menu Start -->
                     <div class="col-xl-8 d-none d-xl-block">
-                        <div class="main-menu position-relative">
+                        <div class="main-menu position-relative" style="margin-right:70px">
                             <ul>
 
                                 <li><a href="{{ route('user.home') }}"> <span>Home</span></a></li>
@@ -118,8 +118,10 @@
                     <!-- Header Menu End -->
 
                     <!-- Header Action Start -->
-                    <div class="col-xl-2 col-6 d-flex align-items-center" >
-                        <div class="header-actions d-flex align-items-center justify-content-end w-100">
+                    <div class="col-xl-2 col-6 d-flex align-items-center"style="margin-left:90px;" >
+                        <div class="header-actions d-flex align-items-center justify-content-end w-100" >
+
+                            {{-- Search --}}
 
                             {{-- Authenticated User --}}
                             @if(Auth::check())
@@ -135,14 +137,14 @@
                                         <!-- Profile Image -->
                                         @if(Auth::user()->profile_image)
                                         <img class="img-profile rounded-circle" 
-                                             src="{{ asset('storage/' . Auth::user()->profile_image) }}" 
-                                             alt="Profile" 
-                                             style="width: 40px; height: 40px; object-fit: cover;">
+                                                src="{{ asset('storage/' . Auth::user()->profile_image) }}" 
+                                                alt="Profile" 
+                                                style="width: 40px; height: 40px; object-fit: cover;">
                                     @else
-                                       
+
                                     @endif
                                     
-                                                                       </a>
+                                                                    </a>
                                 </button>
                                 
                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm border-light rounded" aria-labelledby="userDropdown">
@@ -412,7 +414,8 @@
                         @endforeach
                     </div>
 
-                    <!-- Cart Total -->@if(isset($cartItems) && count($cartItems) > 0)
+                    <!-- Cart Total -->
+                    @if(isset($cartItems) && count($cartItems) > 0)
 
                     <div class="cart-product-total d-flex justify-content-between mb-4">
                         <span class="value fw-bold">Subtotal</span>

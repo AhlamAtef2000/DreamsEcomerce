@@ -152,6 +152,18 @@ class ProductImagesTableSeeder extends Seeder
                     'image_path' => 'product\WomenSports Tracksuit.jpg',
                 ],
 
+                
+                [
+                    'product_id' => 31,
+                    'image_path' => 'product\jeans.jpg',
+                ],
+                
+                [
+                    'product_id' => 32,
+                    'image_path' => 'product\womenjeans.jpg',
+                ],
+
+
             ]);
         }
     }

@@ -18,9 +18,6 @@
                                 </div>
                             </div>
                 
-                            <!-- Category Select -->
-
-                
                             <!-- Show By -->
                             <div class="col-6 col-md-auto">
                                 <form method="GET" action="{{ route('user.shop') }}">
@@ -63,47 +60,41 @@
                 
                     <!-- Search Form -->
                     <form method="GET" action="{{ route('user.shop') }}" class="mb-3">
-                        <div class="col-12 col-md-auto">
-                            <select id="categorySelect" class="custom-style form-select shadow-sm w-auto" name="category_id">
-                                <option value="">All Categories</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                            <input type="hidden" id="categoryIdInput" name="category_id" value="{{ request('category_id') }}">
-                        </div>
+                        <div class="row gy-3">
+                            <div class="col-12 col-md-3">
+                                <select id="categorySelect" class="custom-style form-select shadow-sm w-100" name="category_id">
+                                    <option value="">All Categories</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                     
-                        <div class="col-6 col-md-auto productSelect" style="display: none;">
-                            <select id="productSelect" class="custom-style form-select shadow-sm w-auto" name="product_id"></select>
-                            <input type="hidden" id="productIdInput" name="product_id" value="{{ request('product_id') }}">
-                        </div>
-                        <div class="col-6 col-md-auto colorSelect" style="display: none;">
-                            <select id="colorSelect" class="custom-style form-select shadow-sm w-auto" name="color_id"></select>
-                            <input type="hidden" id="colorIdInput" name="color_id" value="{{ request('color_id') }}">
-                        </div>
-                        <div class="col-6 col-md-auto sizeSelect" style="display: none;">
-                            <select id="sizeSelect" class="custom-style form-select shadow-sm w-auto" name="size_id"></select>
-                            <input type="hidden" id="sizeIdInput" name="size_id" value="{{ request('size_id') }}">
-                        </div>
-                        <div class="col-6 col-md-auto materialSelect" style="display: none;">
-                            <select id="materialSelect" class="custom-style form-select shadow-sm w-auto" name="material_id"></select>
-                            <input type="hidden" id="materialIdInput" name="material_id" value="{{ request('material_id') }}">
-                        </div>
+                            <div class="col-12 col-md-3 productSelect" style="display: none;">
+                                <select id="productSelect" class="custom-style form-select shadow-sm w-100" name="product_id"></select>
+                            </div>
+                            <div class="col-12 col-md-3 colorSelect" style="display: none;">
+                                <select id="colorSelect" class="custom-style form-select shadow-sm w-100" name="color_id"></select>
+                            </div>
+                            <div class="col-12 col-md-3 sizeSelect" style="display: none;">
+                                <select id="sizeSelect" class="custom-style form-select shadow-sm w-100" name="size_id"></select>
+                            </div>
+                            <div class="col-12 col-md-3 materialSelect" style="display: none;">
+                                <select id="materialSelect" class="custom-style form-select shadow-sm w-100" name="material_id"></select>
+                            </div>
                     
-                        <div class="input-group shadow-sm w-auto" style="max-width: 400px;">
-                            <input type="text" name="search" class="form-control" placeholder="Search by name..." value="{{ request('search') }}">
-                            <button class="btn btn-dark" type="submit"><i class="fa fa-search"></i></button>
+                            <div class="col-12 col-md-3">
+                                <div class="input-group shadow-sm w-100">
+                                    <input type="text" name="search" class="form-control" placeholder="Search by name..." value="{{ request('search') }}">
+                                    <button class="btn btn-dark" type="submit"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </form>
-                    
-                
-
                     <!-- Search Form End -->
-                
+
                 </div>
                 
-                <!--shop toolbar end-->
-
                 <!-- Shop Wrapper Start -->
                 <div class="row shop_wrapper grid_4">
 
@@ -114,18 +105,12 @@
                                 <!-- Product Image & Actions -->
                                 <div class="thumb">
                                     <a href="{{ route('user.single-product', $product->id) }}" class="image">
-                                        <a href="{{ route('user.single-product', $product->id) }}" class="image">
-                                            @if (isset($product->images[0]))
-                                                <img class="first-image"
-                                                    src="{{ asset('storage/' . $product->images[0]->image_path) }}"
-                                                    alt="{{ $product->name }}" />
-                                            @endif
-                                        </a>
-
+                                        @if (isset($product->images[0]))
+                                            <img class="first-image" src="{{ asset('storage/' . $product->images[0]->image_path) }}" alt="{{ $product->name }}" style="width: 100%; height: 250px; object-fit: cover;">
+                                        @endif
                                     </a>
                                     <div class="actions">
-                                        <form action="{{ route('user.favorites.store') }}" method="POST"
-                                            style="display: inline;">
+                                        <form action="{{ route('user.favorites.store') }}" method="POST" style="display: inline;">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $product->id }}" />
                                             <button type="submit" class="action wishlist" style="border: none">
@@ -138,12 +123,10 @@
                                 <!-- Product Content -->
                                 <div class="content">
                                     <h4 class="sub-title">
-                                        <a
-                                            href="{{ route('user.single-product', $product->id) }}">{{ $product->name }}</a>
+                                        <a href="{{ route('user.single-product', $product->id) }}">{{ $product->name }}</a>
                                     </h4>
                                     <h5 class="title">
-                                        <a
-                                            href="{{ route('user.single-product', $product->id) }}">{{ $product->description }}</a>
+                                        <a href="{{ route('user.single-product', $product->id) }}">{{ $product->description }}</a>
                                     </h5>
 
                                     <!-- Ratings -->
@@ -168,21 +151,15 @@
 
                                     <!-- Action Buttons -->
                                     <div class="shop-list-btn mt-3">
-                                        <a href="#" class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"
-                                            title="Wishlist">
+                                        <a href="#" class="btn btn-sm btn-outline-dark btn-hover-primary wishlist" title="Wishlist">
                                             <i class="fa fa-heart"></i>
                                         </a>
-                                        <form method="POST" action="{{ route('user.cart.store') }}"
-                                            class="variant-form mt-2">
+                                        <form method="POST" action="{{ route('user.cart.store') }}" class="variant-form mt-2">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                                             <input type="hidden" name="color_id" class="selected-color">
                                             <input type="hidden" name="size_id" class="selected-size">
                                             <input type="hidden" name="material_id" class="selected-material">
-
-                                            {{-- <button class="btn btn-sm btn-outline-dark btn-hover-primary" title="Add To Cart">
-                                            Add To Cart
-                                        </button> --}}
                                         </form>
                                     </div>
                                 </div>
@@ -194,23 +171,18 @@
                 </div>
                 <!-- Shop Wrapper End -->
 
-                <!--shop toolbar start-->
                 <!-- Pagination Start -->
                 <div class="pagination-area mt-4 d-flex justify-content-center mt-4">
                     {{ $products->appends(request()->query())->links('pagination::bootstrap-4') }}
                 </div>
                 <!-- Pagination End -->
 
-                <!--shop toolbar end-->
-
             </div>
         </div>
-    </div>
     </div>
 
     <style>
         .custom-style {
-
             -webkit-tap-highlight-color: transparent;
             background-color: #fff;
             border-radius: 5px;
@@ -218,8 +190,6 @@
             box-sizing: border-box;
             clear: both;
             cursor: pointer;
-            display: block;
-            float: left;
             font-family: inherit;
             font-size: 14px;
             font-weight: normal;
@@ -228,128 +198,92 @@
             outline: none;
             padding-left: 18px;
             padding-right: 30px;
-            position: relative;
-            text-align: left !important;
-            -webkit-transition: all 0.2s ease-in-out;
-            transition: all 0.2s ease-in-out;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
+            text-align: left;
             user-select: none;
-            white-space: nowrap;
-            width: auto;
+            width: 100%;
         }
     </style>
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-   $(document).ready(function () {
+    $(document).ready(function () {
+        // Hide all by default
+        $('.productSelect, .colorSelect, .sizeSelect, .materialSelect').hide();
 
-// Hide all by default
-$('.productSelect, .colorSelect, .sizeSelect, .materialSelect').hide();
+        // When category is selected
+        $('#categorySelect').on('change', function () {
+            let categoryId = $(this).val();
+            $('#categoryIdInput').val(categoryId);  // Set the category_id hidden input
 
-// When category is selected
-$('#categorySelect').on('change', function () {
-    let categoryId = $(this).val();
-    $('#categoryIdInput').val(categoryId);  // Set the category_id hidden input
+            if (categoryId) {
+                $.ajax({
+                    url: `/user/category-products/${categoryId}`,
+                    method: 'GET',
+                    success: function (data) {
+                        let productSelect = $('#productSelect');
+                        productSelect.empty();
+                        $('.productSelect').hide();
 
-    if (categoryId) {
-        $.ajax({
-            url: `/user/category-products/${categoryId}`,
-            method: 'GET',
-            success: function (data) {
-                let productSelect = $('#productSelect');
-                productSelect.empty();
-                $('.productSelect').hide();
+                        if (data.products.length > 0) {
+                            data.products.forEach(function (product) {
+                                productSelect.append(`<option value="${product.id}">${product.name}</option>`);
+                            });
 
-                if (data.products.length > 0) {
-                    data.products.forEach(function (product) {
-                        productSelect.append(`<option value="${product.id}">${product.name}</option>`);
-                    });
+                            $('.productSelect').show(); // Show if products found
 
-                    $('.productSelect').show(); // Show if products found
-
-                    // Load first product's details
-                    loadProductDetails(data.products[0].id);
-                } else {
-                    $('#colorSelect, #sizeSelect, #materialSelect').empty();
-                    $('.colorSelect, .sizeSelect, .materialSelect').hide();
-                }
+                            // Load first product's details
+                            loadProductDetails(data.products[0].id);
+                        } else {
+                            $('#colorSelect, #sizeSelect, #materialSelect').empty();
+                            $('.colorSelect, .sizeSelect, .materialSelect').hide();
+                        }
+                    }
+                });
+            } else {
+                $('#productSelect, #colorSelect, #sizeSelect, #materialSelect').empty();
+                $('.productSelect, .colorSelect, .sizeSelect, .materialSelect').hide();
             }
         });
-    } else {
-        $('#productSelect, #colorSelect, #sizeSelect, #materialSelect').empty();
-        $('.productSelect, .colorSelect, .sizeSelect, .materialSelect').hide();
-    }
-});
 
-// When a product is selected
-$('#productSelect').on('change', function () {
-    let productId = $(this).val();
-    $('#productIdInput').val(productId);  // Set the product_id hidden input
-    loadProductDetails(productId);
-});
+        // Load details of selected product
+        function loadProductDetails(productId) {
+            $.ajax({
+                url: `/user/product-details/${productId}`,
+                method: 'GET',
+                success: function (data) {
+                    let colorSelect = $('#colorSelect');
+                    let sizeSelect = $('#sizeSelect');
+                    let materialSelect = $('#materialSelect');
 
-// When color is selected
-$('#colorSelect').on('change', function () {
-    let colorId = $(this).val();
-    $('#colorIdInput').val(colorId);  // Set the color_id hidden input
-});
+                    colorSelect.empty();
+                    sizeSelect.empty();
+                    materialSelect.empty();
 
-// When size is selected
-$('#sizeSelect').on('change', function () {
-    let sizeId = $(this).val();
-    $('#sizeIdInput').val(sizeId);  // Set the size_id hidden input
-});
+                    $('.colorSelect, .sizeSelect, .materialSelect').hide();
 
-// When material is selected
-$('#materialSelect').on('change', function () {
-    let materialId = $(this).val();
-    $('#materialIdInput').val(materialId);  // Set the material_id hidden input
-});
+                    if (data.colors.length > 0) {
+                        data.colors.forEach(color => {
+                            colorSelect.append(`<option value="${color.id}">${color.name}</option>`);
+                        });
+                        $('.colorSelect').show();
+                    }
 
-// Load details of selected product
-function loadProductDetails(productId) {
-    $.ajax({
-        url: `/user/product-details/${productId}`,
-        method: 'GET',
-        success: function (data) {
-            let colorSelect = $('#colorSelect');
-            let sizeSelect = $('#sizeSelect');
-            let materialSelect = $('#materialSelect');
+                    if (data.sizes.length > 0) {
+                        data.sizes.forEach(size => {
+                            sizeSelect.append(`<option value="${size.id}">${size.name}</option>`);
+                        });
+                        $('.sizeSelect').show();
+                    }
 
-            colorSelect.empty();
-            sizeSelect.empty();
-            materialSelect.empty();
-
-            $('.colorSelect, .sizeSelect, .materialSelect').hide();
-
-            if (data.colors.length > 0) {
-                data.colors.forEach(color => {
-                    colorSelect.append(`<option value="${color.id}">${color.name}</option>`);
-                });
-                $('.colorSelect').show();
-            }
-
-            if (data.sizes.length > 0) {
-                data.sizes.forEach(size => {
-                    sizeSelect.append(`<option value="${size.id}">${size.name}</option>`);
-                });
-                $('.sizeSelect').show();
-            }
-
-            if (data.materials.length > 0) {
-                data.materials.forEach(material => {
-                    materialSelect.append(`<option value="${material.id}">${material.name}</option>`);
-                });
-                $('.materialSelect').show();
-            }
+                    if (data.materials.length > 0) {
+                        data.materials.forEach(material => {
+                            materialSelect.append(`<option value="${material.id}">${material.name}</option>`);
+                        });
+                        $('.materialSelect').show();
+                    }
+                }
+            });
         }
     });
-}
-
-});
-
-    </script>
-    
+</script>

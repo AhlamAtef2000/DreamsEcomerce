@@ -406,6 +406,35 @@ Product::create([
 
 ]);
 
+
+// بنطلون رجالي
+Product::create([
+    'category_id' =>1,
+    'name' => 'Men’s Slim Fit Jeans',
+    'description' => 'Stylish slim fit jeans for men.',
+    'price' => 35.00,
+    'stock' => 150,
+    'is_on_sale' => 1,
+    'status_id' => 1,
+    'discount_percentage' => 10, // إذا كان هناك خصم
+    'sale_end_date' => now()->addDays(7),
+    'created_at' => Carbon::now()->subDays(2),
+]);
+
+// بنطلون نسائي
+Product::create([
+    'category_id' => 2, 
+    'name' => 'Women’s jeans pants',
+    'description' => 'Elegant high waist trousers for women.',
+    'price' => 40.00,
+    'stock' => 120,
+    'is_on_sale' => 1,
+    'status_id' => 1,
+    'discount_percentage' => 15, // إذا كان هناك خصم
+    'sale_end_date' => now()->addDays(10),
+    'created_at' => Carbon::now()->subDays(1),
+]);
+
     }
 
 }

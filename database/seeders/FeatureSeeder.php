@@ -16,8 +16,8 @@ class FeatureSeeder extends Seeder
             Feature::insert([
                 [
                     'picture' => 'image1.jpg',
-                    'title' => 'Free Shipping',
-                    'description' => 'Free shipping on  orders above 100 Jod',
+                    'title' => 'Low Shipping Rates',
+                    'description' => 'We offer low shipping rates for all orders',
                 ],
                 [
                     'picture' => 'image2.jpg',
@@ -31,8 +31,9 @@ class FeatureSeeder extends Seeder
                 ],
                 [
                     'picture' => 'image5.jpg',
-                    'title' => 'Order Discount',
-                    'description' => 'On every order over 150 Jod',
+                    'title' => 'Discount Coupons',
+                'description' => 'Get discount coupons for orders',
+
                 ],
             ]);
     }

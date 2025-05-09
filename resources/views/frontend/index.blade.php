@@ -189,7 +189,7 @@
                                     Trend Fashion<br />
                                     Collection
                                 </h2>
-                                <p>Up to 40% off selected Product</p>
+                                <p>have copuns off selected Product</p>
                                 <a href="{{ route('user.shop') }}" class="btn btn-lg btn-primary btn-hover-dark">Shop
                                     Now</a>
                             </div>
@@ -626,22 +626,18 @@
                                     <div class="swiper-wrapper">
                                         <!-- Product Start -->
                                         @foreach ($dailyProducts as $dailyProduct)
-                                            <div class="swiper-slide product-wrapper" data-aos="fade-right"
-                                                data-aos-delay="600">
+                                            <div class="swiper-slide product-wrapper" data-aos="fade-right" data-aos-delay="600">
                                                 <!-- Single Product Deal Start -->
                                                 <div class="product single-deal-product product-border-left">
                                                     <div class="thumb">
-                                                        <a href="{{ route('user.single-product', $dailyProduct->id) }}"
-                                                            class="image">
+                                                        <a href="{{ route('user.single-product', $dailyProduct->id) }}" class="image">
                                                             @if (isset($dailyProduct->images[0]->image_path))
-                                                                <img src="{{ asset('storage/' . $dailyProduct->images[0]->image_path) }}"
-                                                                    alt="Product" />
+                                                                <img src="{{ asset('storage/' . $dailyProduct->images[0]->image_path) }}" alt="Product" class="img-fluid product-img" />
                                                             @endif
                                                         </a>
                                                         <span class="badges">
                                                             @if ($dailyProduct->discount_percentage)
-                                                                <span
-                                                                    class="sale">-{{ $dailyProduct->discount_percentage }}%</span>
+                                                                <span class="sale">-{{ $dailyProduct->discount_percentage }}%</span>
                                                             @endif
                                                         </span>
                                                     </div>
@@ -649,295 +645,123 @@
                                                         <p class="inner-desc">Hurry Up! Offer Ends In:</p>
                                                         @if ($dailyProduct->sale_end_date)
                                                             <div class="countdown-area">
-                                                                <div class="countdown-wrapper d-flex"
-                                                                    data-countdown="{{ $dailyProduct->sale_end_date }}">
-                                                                </div>
+                                                                <div class="countdown-wrapper d-flex" data-countdown="{{ $dailyProduct->sale_end_date }}"></div>
                                                             </div>
                                                         @endif
-                                                        <h4 class="sub-title"><a
-                                                                href="{{ route('user.single-product', $dailyProduct->id) }}">{{ $dailyProduct->name }}</a>
-                                                        </h4>
-                                                        <h5 class="title"><a
-                                                                href="{{ route('user.single-product', $dailyProduct->id) }}">{{ $dailyProduct->description }}</a>
-                                                        </h5>
-
+                                                        <h4 class="sub-title"><a href="{{ route('user.single-product', $dailyProduct->id) }}">{{ $dailyProduct->name }}</a></h4>
+                                                        <h5 class="title"><a href="{{ route('user.single-product', $dailyProduct->id) }}">{{ $dailyProduct->description }}</a></h5>
+            
                                                         @php
-                                                            $rating =
-                                                                optional($dailyProduct->reviews->first())->rating ?? 0;
+                                                            $rating = optional($dailyProduct->reviews->first())->rating ?? 0;
                                                         @endphp
-
+            
                                                         <!-- Ratings with Gold Stars -->
                                                         <span class="ratings">
                                                             @for ($i = 1; $i <= 5; $i++)
                                                                 @if ($i <= $rating)
-                                                                    <i class="fas fa-star text-warning"></i>
-                                                                    <!-- Gold Star -->
+                                                                    <i class="fas fa-star text-warning"></i> <!-- Gold Star -->
                                                                 @else
-                                                                    <i class="far fa-star text-muted"></i>
-                                                                    <!-- Gray Star -->
+                                                                    <i class="far fa-star text-muted"></i> <!-- Gray Star -->
                                                                 @endif
                                                             @endfor
                                                         </span>
-
+            
                                                         <span class="price">
-                                                            <span
-                                                                class="new">{{ number_format($dailyProduct->price, 2) }}
-                                                                JOD</span>
+                                                            <span class="new">{{ number_format($dailyProduct->price, 2) }} JOD</span>
                                                             @if ($dailyProduct->discount_percentage)
-                                                                <span
-                                                                    class="old">{{ number_format($dailyProduct->price * (1 - $dailyProduct->discount_percentage / 100), 2) }}
-                                                                    JOD</span>
+                                                                <span class="old">{{ number_format($dailyProduct->price * (1 - $dailyProduct->discount_percentage / 100), 2) }} JOD</span>
                                                             @endif
                                                         </span>
-
-                                                        <div class="shop-list-btn mt-3">
-                                                            <a href="{{ route('user.favorites.store',$dailyProduct->id) }}"
-                                                                class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"
-                                                                title="Wishlist">
-                                                                <i class="fa fa-heart"></i>
-                                                            </a>
-                                                            <a href="{{ route('user.single-product',$dailyProduct->id) }}" class="btn btn-sm btn-outline-dark btn-hover-primary"
-                                                                title="View Item">
-                                                                View Item
-                                                        </a>
-
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <!-- Single Product Deal End -->
                                             </div>
                                         @endforeach
                                     </div>
-
+            
                                     <!-- Swiper Pagination Start -->
                                     <div class="swiper-pagination d-md-none"></div>
                                     <!-- Swiper Pagination End -->
-
+            
                                     <!-- Next Previous Button Start -->
-                                    <div
-                                        class="swiper-product-deal-next swiper-button-next swiper-button-white d-md-flex d-none">
-                                        <i class="pe-7s-angle-right"></i></div>
-                                    <div
-                                        class="swiper-product-deal-prev swiper-button-prev swiper-button-white d-md-flex d-none">
-                                        <i class="pe-7s-angle-left"></i></div>
-                                    <!-- Next Previous Button End -->
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- <div class="tab-pane fade" id="product-deal-best-sellers">
-                            <div class="product-deal-carousel">
-                                <div class="swiper-container">
-                                    <div class="swiper-wrapper">
-                                        @foreach ($bestSellers as $bestSeller)
-                                            <div class="swiper-slide product-wrapper mb-n10">
-                                                <!-- Single Product Deal Start -->
-                                                <div class="product single-deal-product product-border-left mb-10">
-                                                    <div class="thumb">
-                                                        <a href="{{ route('user.single-product', $bestSeller->id) }}"
-                                                            class="image">
-                                                            @if (isset($bestSeller->images[0]->image_path))
-                                                                <img src="{{ asset('storage/' . $bestSeller->images[0]->image_path) }}"
-                                                                    alt="Product" />
-                                                            @endif
-                                                        </a>
-                                                        <span class="badges">
-                                                            @if ($bestSeller->discount_percentage)
-                                                                <span
-                                                                    class="sale">-{{ $bestSeller->discount_percentage }}%</span>
-                                                            @endif
-                                                        </span>
-                                                    </div>
-                                                    <div class="content">
-                                                        <p class="inner-desc">Hurry Up! Offer Ends In:</p>
-                                                        @if ($bestSeller->sale_end_date)
-                                                            <div class="countdown-area">
-                                                                <div class="countdown-wrapper d-flex"
-                                                                    data-countdown="{{ $bestSeller->sale_end_date }}">
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                        <h4 class="sub-title"><a
-                                                                href="{{ route('user.single-product', $bestSeller->id) }}">{{ $bestSeller->name }}</a>
-                                                        </h4>
-                                                        <h5 class="title"><a
-                                                                href="{{ route('user.single-product', $bestSeller->id) }}">{{ $bestSeller->description }}</a>
-                                                        </h5>
-
-                                                        @php
-                                                            $rating =
-                                                                optional($bestSeller->reviews->first())->rating ?? 0;
-                                                        @endphp
-
-                                                        <!-- Ratings with Gold Stars -->
-                                                        <span class="ratings">
-                                                            @for ($i = 1; $i <= 5; $i++)
-                                                                @if ($i <= $rating)
-                                                                    <i class="fas fa-star text-warning"></i>
-                                                                    <!-- Gold Star -->
-                                                                @else
-                                                                    <i class="far fa-star text-muted"></i>
-                                                                    <!-- Gray Star -->
-                                                                @endif
-                                                            @endfor
-                                                        </span>
-
-                                                        <!-- Price -->
-                                                        <span class="price">
-                                                            <span
-                                                                class="new">{{ number_format($bestSeller->price, 2) }}
-                                                                JOD</span>
-                                                            @if ($bestSeller->discount_percentage)
-                                                                <span
-                                                                    class="old">{{ number_format($bestSeller->price * (1 - $bestSeller->discount_percentage / 100), 2) }}
-                                                                    JOD</span>
-                                                            @endif
-                                                        </span>
-
-                                                        <div class="shop-list-btn mt-3">
-                                                            <a href="{{ route('user.favorites.store',$bestSeller->id) }}"
-                                                                class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"
-                                                                title="Wishlist">
-                                                                <i class="fa fa-heart"></i>
-                                                            </a>
-                                                            <a href="{{ route('user.single-product',$bestSeller->id) }}" class="btn btn-sm btn-outline-dark btn-hover-primary"
-                                                                title="View Item">
-                                                                View Item
-                                                        </a>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Single Product Deal End -->
-                                            </div>
-                                        @endforeach
-                                    </div>
-
-                                    <!-- Swiper Pagination Start -->
-                                    <div class="swiper-pagination d-md-none"></div>
-                                    <!-- Swiper Pagination End -->
-
-                                    <!-- Next Previous Button Start -->
-                                    <div
-                                        class="swiper-product-deal-next swiper-button-next swiper-button-white d-md-flex d-none">
+                                    <div class="swiper-product-deal-next swiper-button-next swiper-button-white d-md-flex d-none">
                                         <i class="pe-7s-angle-right"></i>
                                     </div>
-                                    <div
-                                        class="swiper-product-deal-prev swiper-button-prev swiper-button-white d-md-flex d-none">
+                                    <div class="swiper-product-deal-prev swiper-button-prev swiper-button-white d-md-flex d-none">
                                         <i class="pe-7s-angle-left"></i>
                                     </div>
                                     <!-- Next Previous Button End -->
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="tab-pane fade" id="product-deal-sale-items">
-                            <div class="product-deal-carousel">
-                                <div class="swiper-container">
-                                    <div class="swiper-wrapper">
-                                        @foreach ($saleItems as $saleItem)
-                                            <div class="swiper-slide product-wrapper mb-n10">
-                                                <!-- Single Product Deal Start -->
-                                                <div class="product single-deal-product product-border-left mb-10">
-                                                    <div class="thumb">
-                                                        <a href="{{ route('user.single-product', $saleItem->id) }}"
-                                                            class="image">
-                                                            @if (isset($saleItem->images[0]->image_path))
-                                                                <img src="{{ asset('storage/' . $saleItem->images[0]->image_path) }}"
-                                                                    alt="Product" />
-                                                            @endif
-                                                        </a>
-                                                        <span class="badges">
-                                                            @if ($saleItem->discount_percentage)
-                                                                <span
-                                                                    class="sale">-{{ $saleItem->discount_percentage }}%</span>
-                                                            @endif
-                                                        </span>
-                                                    </div>
-                                                    <div class="content">
-                                                        <p class="inner-desc">Hurry Up! Offer Ends In:</p>
-                                                        @if ($saleItem->sale_end_date)
-                                                            <div class="countdown-area">
-                                                                <div class="countdown-wrapper d-flex"
-                                                                    data-countdown="{{ $saleItem->sale_end_date }}"></div>
-                                                            </div>
-                                                        @endif
-                                                        <h4 class="sub-title"><a
-                                                                href="{{ route('user.single-product', $saleItem->id) }}">{{ $bestSeller->name }}</a>
-                                                        </h4>
-                                                        <h5 class="title"><a
-                                                                href="{{ route('user.single-product', $saleItem->id) }}">{{ $bestSeller->description }}</a>
-                                                        </h5>
-
-                                                        @php
-                                                            $rating = ceil($saleItem->reviews->avg('rating') ?? 0);
-                                                        @endphp
-
-                                                        <!-- Ratings with Gold Stars -->
-                                                        <span class="ratings">
-                                                            @for ($i = 1; $i <= 5; $i++)
-                                                                @if ($i <= $rating)
-                                                                    <i class="fas fa-star text-warning"></i>
-                                                                    <!-- Gold Star -->
-                                                                @else
-                                                                    <i class="far fa-star text-muted"></i>
-                                                                    <!-- Gray Star -->
-                                                                @endif
-                                                            @endfor
-                                                        </span>
-
-                                                        <!-- Price -->
-                                                        <span class="price">
-                                                            <span class="new">{{ number_format($saleItem->price, 2) }}
-                                                                JOD</span>
-                                                            @if ($saleItem->discount_percentage)
-                                                                <span
-                                                                    class="old">{{ number_format($saleItem->price * (1 - $saleItem->discount_percentage / 100), 2) }}
-                                                                    JOD</span>
-                                                            @endif
-                                                        </span>
-
-                                                        <div class="shop-list-btn mt-3">
-                                                            <a href="{{ route('user.favorites.store',$saleItem->id) }}"
-                                                                class="btn btn-sm btn-outline-dark btn-hover-primary wishlist"
-                                                                title="Wishlist">
-                                                                <i class="fa fa-heart"></i>
-                                                            </a>
-                                                            <a href="{{ route('user.single-product',$saleItem->id) }}" class="btn btn-sm btn-outline-dark btn-hover-primary"
-                                                                title="View Item">
-                                                                View Item
-                                                        </a>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Single Product Deal End -->
-                                            </div>
-                                        @endforeach
-                                    </div>
-
-                                    <!-- Swiper Pagination Start -->
-                                    <div class="swiper-pagination d-md-none"></div>
-                                    <!-- Swiper Pagination End -->
-
-                                    <!-- Next Previous Button Start -->
-                                    <div
-                                        class="swiper-product-deal-next swiper-button-next swiper-button-white d-md-flex d-none">
-                                        <i class="pe-7s-angle-right"></i>
-                                    </div>
-                                    <div
-                                        class="swiper-product-deal-prev swiper-button-prev swiper-button-white d-md-flex d-none">
-                                        <i class="pe-7s-angle-left"></i>
-                                    </div>
-                                    <!-- Next Previous Button End -->
-                                </div>
-                            </div>
-                        </div> --}}
-
                     </div>
                 </div>
             </div>
+            
+            <style>
+                .product-img {
+                    width: 100%;
+                    height: 250px;
+                    object-fit: cover; /* Make sure the images fill the container */
+                }
+            
+                .product-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-bottom: 30px;
+                    border: 1px solid #f1f1f1;
+                    padding: 15px;
+                    background-color: #fff;
+                }
+            
+                .content {
+                    text-align: center;
+                }
+            
+                .inner-desc {
+                    font-size: 14px;
+                    color: #666;
+                    margin-bottom: 10px;
+                }
+            
+                .sub-title {
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+            
+                .title {
+                    font-size: 16px;
+                    color: #555;
+                    margin: 10px 0;
+                }
+            
+                .price {
+                    font-size: 18px;
+                    color: #333;
+                    margin-bottom: 10px;
+                }
+            
+                .price .new {
+                    color: #000;
+                }
+            
+                .price .old {
+                    text-decoration: line-through;
+                    color: #777;
+                    margin-left: 5px;
+                }
+            
+                .shop-list-btn a {
+                    margin-right: 10px;
+                }
+            
+                .btn {
+                    font-size: 14px;
+                    padding: 8px 12px;
+                }
+            </style>
+            
             <!-- Products Tab End -->
         </div>
     </div>

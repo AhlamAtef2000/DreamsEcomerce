@@ -27,12 +27,20 @@ class ContactController extends Controller
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
         ]);
-        
+     
 
-        Contact::create($request->all());
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ]);
 
-        return redirect()->route('home');
+      
+        return redirect()->route('home')->with('success', 'Your message has been sent!');
     }
+
+  
 
     public function show(Contact $contact)
     {

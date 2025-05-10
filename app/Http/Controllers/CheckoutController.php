@@ -41,7 +41,17 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     
+    // $validated = $request->validate([
+    //     'first_name' => 'required|alpha|max:255',  
+    //     'last_name' => 'required|alpha|max:255',   
+    //     'address' => 'required|string|max:255',   
+    //     'town_city' => 'required|string|max:255', 
+    //     'state_county' => 'required|string|max:255', 
+    //     'postcode_zip' => 'required|numeric',     
+    //     'email' => 'required|email|max:255',     
+    //     'phone' => 'required|regex:/^07[7-9]{1}[0-9]{7}$/', 
+    // ]);
     }
 
     /**

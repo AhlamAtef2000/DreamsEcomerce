@@ -208,7 +208,7 @@
 @endif
 
 
-        <form action="{{ route('user.orders.store') }}" method="POST">
+          <form action="{{ route('user.orders.store') }}" method="POST">
             @csrf
             <div class="row">
 
@@ -629,3 +629,6 @@
 
     });
 </script>
+
+
+

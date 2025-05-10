@@ -220,34 +220,89 @@
 
 
     <!-- Feature Section Start -->
+ <!-- Product List Start -->
+ <div class="section section-padding" style="padding-top:10px;">
+    <div class="container" style="padding-left: 0; padding-right: 0; margin-bottom: 20px;">
+        <div class="row mb-n8">
+            @foreach ($categoryWithProduct as $categoryProduct)
+                <div class="col-md-6 col-lg-4 col-12 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <!-- Product List Title Start -->
+                    <div class="product-list-title text-center mb-4" style="text-align: center; margin-bottom: 15px;">
+                        <h2 class="title pb-3 mb-0" style="font-size: 18px; font-weight: bold; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $categoryProduct->name }}</h2>
+                        <span class="divider"></span>
+                    </div>
+                    <!-- Product List Title End -->
 
-    <div class="section" style="margin-top:4%">
-        <div class="container">
-            <div class="feature-wrap">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-                    @foreach (App\Models\Feature::all() as $feature)
-                        <div class="col mb-5" data-aos="fade-up" data-aos-delay="300">
-                            <div class="feature d-flex align-items-start" style="gap: 15px;">
-                                <div class="icon text-primary" style="flex-shrink: 0;">
-                                    @if ($feature->picture)
-                                        <img src="{{ asset('storage/features/' . $feature->picture) }}"
-                                            alt="Feature Icon" style="width: 50px; height: 50px;">
-                                    @else
-                                        <img src="{{ asset('images/default-image.jpg') }}"
-                                            alt="Default Feature Icon" style="width: 50px; height: 50px;">
-                                    @endif
-                                </div>
-                                <div>
-                                    <h5 class="title mb-1">{{ $feature->title }}</h5>
-                                    <p class="mb-0">{{ $feature->description }}</p>
-                                </div>
+                    <!-- Product List Carousel Start -->
+                    <div class="product-list-carousel">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper" style="display: flex; gap: 10px; justify-content: space-between;">
+
+                                @foreach ($categoryProduct->products as $product)
+                                    <div class="swiper-slide product-list-wrapper" style="display: flex; flex-direction: column; justify-content: flex-start; padding: 10px; background-color: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                                        <!-- Single Product List Start -->
+                                        <div class="single-product-list product-hover mb-4" style="text-align: center;">
+                                            <div class="thumb">
+                                                <a href="{{ route('user.single-product', $product->id) }}" class="image">
+                                                    @if (@isset($product->images[0]->image_path))
+                                                        <img class="first-image"
+                                                            src="{{ asset('storage/' . $product->images[0]->image_path) }}"
+                                                            alt="{{ $product->name }}"
+                                                            style="width: 100%; height: auto; object-fit: cover; border-radius: 8px;" />
+                                                    @endif
+                                                </a>
+                                            </div>
+                                            <div class="content" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                                                <h5 class="title" style="font-size: 16px; font-weight: bold; color: #444; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                                    <a href="{{ route('user.single-product', $product->id) }}" style="color: #444;">{{ $product->name }}</a>
+                                                </h5>
+                                                <span class="price" style="font-size: 18px; color: #e74c3c; font-weight: bold;">
+                                                    <span class="new">JOD{{ number_format($product->price, 2) }}</span>
+                                                </span>
+                                                <div class="ratings" style="margin-top: 5px; display: flex; justify-content: center;">
+                                                    @php
+                                                        $rating = optional($product->reviews->first())->rating ?? 0;
+                                                    @endphp
+
+                                                    <!-- Ratings with Gold Stars -->
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $rating)
+                                                            <i class="fas fa-star text-warning" style="font-size: 16px; margin-right: 2px;"></i>
+                                                        @else
+                                                            <i class="far fa-star text-muted" style="font-size: 16px; margin-right: 2px;"></i>
+                                                        @endif
+                                                    @endfor
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Single Product List End -->
+                                    </div>
+                                @endforeach
+
                             </div>
+
+                            <!-- Swiper Navigation Buttons -->
+                            <div class="swiper-product-list-next swiper-button-next" style="color: #333; font-size: 24px;">
+                                <i class="pe-7s-angle-right"></i>
+                            </div>
+                            <div class="swiper-product-list-prev swiper-button-prev" style="color: #333; font-size: 24px;">
+                                <i class="pe-7s-angle-left"></i>
+                            </div>
+
                         </div>
-                    @endforeach
+                    </div>
+                    <!-- Product List Carousel End -->
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
+</div>
+
+
+
+
+
+<!-- Product List End -->
 
 
 
@@ -598,13 +653,13 @@
 
 
     <!-- Product Deal Section Start -->
-    <div class="section section-padding mt-0 overflow-hidden">
+    <div class="section section-padding mt-0 overflow-hidden" style=" padding-top: 2px;">
         <div class="container">
             <!-- Section Title & Tab Start -->
             <div class="row">
                 <!-- Tab Start -->
                 <div class="col-12">
-                    <div class="section-title-produt-tab-wrapper">
+                    <div class="section-title-produt-tab-wrapper ">
                         <div class="section-title m-0" data-aos="fade-right" data-aos-delay="300">
                             <h1 class="title">Daily Deals</h1>
                         </div>
@@ -667,9 +722,9 @@
                                                         </span>
             
                                                         <span class="price">
-                                                            <span class="new">{{ number_format($dailyProduct->price, 2) }} JOD</span>
+                                                            <span class="old">{{ number_format($dailyProduct->price, 2) }} JOD</span>
                                                             @if ($dailyProduct->discount_percentage)
-                                                                <span class="old">{{ number_format($dailyProduct->price * (1 - $dailyProduct->discount_percentage / 100), 2) }} JOD</span>
+                                                                <span class="new">{{ number_format($dailyProduct->price * (1 - $dailyProduct->discount_percentage / 100), 2) }} JOD</span>
                                                             @endif
                                                         </span>
                                                     </div>
@@ -769,100 +824,41 @@
 
 
 
-    <!-- Product List Start -->
-    <div class="section section-padding">
+   
+    <!-- Feature Section Start -->
+
+    <div class="section" style="margin-bottom: 50px; ">
+
         <div class="container">
-            <div class="row mb-n8">
-                @foreach ($categoryWithProduct as $categoryProduct)
-                    <div class="col-md-6 col-lg-4 col-12 mb-8" data-aos="fade-up" data-aos-delay="300">
-                        <!-- Product List Title Start -->
-                        <div class="product-list-title">
-                            <h2 class="title pb-3 mb-0">{{ $categoryProduct->name }}</h2>
-                            <span></span>
-                        </div>
-                        <!-- Product List Title End -->
-
-                        <!-- Product List Carousel Start -->
-                        <div class="product-list-carousel">
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-
-                                    @foreach ($categoryProduct->products as $product)
-                                        <div class="swiper-slide product-list-wrapper mb-n6">
-                                            <!-- Single Product List Start -->
-                                            <div class="single-product-list product-hover mb-6">
-                                                <div class="thumb">
-
-                                                    <a href="{{ route('user.single-product', $product->id) }}"
-                                                        class="image">
-                                                        @if (@isset($product->images[0]->image_path))
-                                                            <img class="first-image"
-                                                                src="{{ asset('storage/' . $product->images[0]->image_path) }}"
-                                                                alt="{{ $product->name }}"
-                                                                style="width: 100px;height:100px" />
-                                                        @endif
-
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="title">
-                                                        <a
-                                                            href="{{ route('user.single-product', $product->id) }}">{{ $product->name }}</a>
-                                                    </h5>
-                                                    <span class="price">
-                                                        <span
-                                                            class="new">JOD{{ number_format($product->price, 2) }}</span>
-                                                    </span>
-                                                    <div>
-
-                                                        @php
-                                                            $rating = optional($product->reviews->first())->rating ?? 0;
-                                                        @endphp
-
-                                                        <!-- Ratings with Gold Stars -->
-                                                        <span class="ratings">
-                                                            @for ($i = 1; $i <= 5; $i++)
-                                                                @if ($i <= $rating)
-                                                                    <i class="fas fa-star text-warning"></i>
-                                                                    <!-- Gold Star -->
-                                                                @else
-                                                                    <i class="far fa-star text-muted"></i>
-                                                                    <!-- Gray Star -->
-                                                                @endif
-                                                            @endfor
-                                                        </span>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Single Product List End -->
-                                        </div>
-                                    @endforeach
-
+            <div class="feature-wrap">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+                    @foreach (App\Models\Feature::all() as $feature)
+                        <div class="col mb-5" data-aos="fade-up" data-aos-delay="300">
+                            <div class="feature d-flex align-items-start" style="gap: 15px;">
+                                <div class="icon text-primary" style="flex-shrink: 0;">
+                                    @if ($feature->picture)
+                                        <img src="{{ asset('storage/features/' . $feature->picture) }}"
+                                            alt="Feature Icon" style="width: 50px; height: 50px;">
+                                    @else
+                                        <img src="{{ asset('images/default-image.jpg') }}"
+                                            alt="Default Feature Icon" style="width: 50px; height: 50px;">
+                                    @endif
                                 </div>
-
-                                <!-- Swiper Navigation Buttons -->
-                                <div class="swiper-product-list-next swiper-button-next">
-                                    <i class="pe-7s-angle-right"></i>
+                                <div>
+                                    <h5 class="title mb-1">{{ $feature->title }}</h5>
+                                    <p class="mb-0">{{ $feature->description }}</p>
                                 </div>
-                                <div class="swiper-product-list-prev swiper-button-prev">
-                                    <i class="pe-7s-angle-left"></i>
-                                </div>
-
                             </div>
                         </div>
-                        <!-- Product List Carousel End -->
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
-
         </div>
     </div>
 
 
 
-
-    <!-- Product List End -->
+    <!-- Feature Section End -->
 
     <!-- Brand Logo Start -->
 
@@ -904,5 +900,7 @@
         border-radius: 10px;
         height: 100%;
     }
+
+    
 
 </style>

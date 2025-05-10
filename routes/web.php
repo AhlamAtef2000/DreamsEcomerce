@@ -135,3 +135,9 @@ Route::get('/category-products/{categoryId}', [ShopController::class, 'getCatego
 
 Route::get('/api/countries', [ShipmentController::class, 'getCountries']);
 Route::get('/shipping-methods/{countryId}', [ShipmentController::class, 'getShippingMethodsByCountry']);
+
+
+Route::get('/security-policy', function () {
+        return view('security-policy');
+    });
+    

@@ -130,7 +130,7 @@
                                 <button class="btn dropdown-toggle header-action-btn" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border: none; padding: 0;">
                                     <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <!-- User Name -->
-                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small me-2 text-dark" >
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small me-2 text-dark" style="font-size: 15px; font-weight: bold; ">
                                             welcome back,
                                             {{ Auth::user()->name }}</span>
                                         

@@ -156,7 +156,7 @@
 
                     <!-- Social Share -->
                     <div class="social-share">
-                        <span>Share :</span>
+                        {{-- <span>Share :</span> --}}
                         <a href="#"><i class="fa fa-facebook-square facebook-color"></i></a>
                         <a href="#"><i class="fa fa-twitter-square twitter-color"></i></a>
                         <a href="#"><i class="fa fa-linkedin-square linkedin-color"></i></a>
@@ -165,9 +165,14 @@
 
                     <!-- Policies -->
                     <ul class="product-delivery-policy border-top pt-4 mt-4 border-bottom pb-4">
-                        <li><i class="fa fa-check-square"></i> Security Policy</li>
+                        {{-- <li><i class="fa fa-check-square"></i> <a href="{{ url('/security-policy') }}">Security Policy</a></li>
+                         --}}
+                         <li><i class="fa fa-check-square"></i> <a href="/security-policy">Security Policy</a></li>
+                         <p>Your privacy and security are our top priority.  we protect your data.</p>
                         <li><i class="fa fa-truck"></i> Delivery Policy</li>
-                        <li><i class="fa fa-refresh"></i> Return Policy</li>
+                        <p>Find out about our shipping methods, estimated delivery times, and more.</p>
+                        {{-- <li><i class="fa fa-refresh"></i> Return Policy</li> --}}
+
                     </ul>
                 </div>
             </div>

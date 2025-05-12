@@ -61,7 +61,7 @@
                             <a href="#">Pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                             <ul class="dropdown">
                                 <li><a href="{{ route('user.about') }}">About Us</a></li>
-                                <li><a href="{{ route('user.contact') }}">Contact</a></li>
+                                <li><a href="{{ route('user.contact.index') }}">Contact</a></li>
                                 <li><a href="faq.html">Faq</a></li>
                                 <li><a href="404-error.html">Error 404</a></li>
                                 <li><a href="my-account.html">My Account</a></li>
@@ -208,7 +208,7 @@
 @endif
 
 
-          <form action="{{ route('user.orders.store') }}" method="POST">
+        <form action="{{ route('user.orders.store') }}" method="POST">
             @csrf
             <div class="row">
 
@@ -222,6 +222,9 @@
                                 <select id="countrySelect" class="form-control" name="country" required>
                                     <option disabled selected>Loading countries...</option>
                                 </select>
+                                @error('country')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
 
                             <div class="col-md-12 mb-3">
@@ -229,46 +232,82 @@
                                 <select id="shippingMethodSelect" class="form-control" name="shipping_method_id" required>
                                     <option disabled selected>Select a city first</option>
                                 </select>
+                                @error('shipping_method_id')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label>First Name <span class="required">*</span></label>
                                 <input type="text" name="first_name" value={{ Auth::user()->name }} class="form-control" required>
+                                @error('first_name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Last Name <span class="required">*</span></label>
-                                <input type="text" name="last_name" class="form-control" required>
+                                <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control" required>
+                                @error('last_name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label>Address <span class="required">*</span></label>
-                                <input type="text" name="address" class="form-control" placeholder="Street address" required>
+                                <input type="text" name="address" value="{{ old('address') }}" class="form-control" placeholder="Street address" required>
+                       
+                                @error('address')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                             <div class="col-md-12 mb-3">
-                                <input type="text" name="apartment" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
+                                <input type="text" name="apartment" value="{{ old('apartment') }}" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
+                                @error('apartment')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label>Town / City <span class="required">*</span></label>
-                                <input type="text" name="town_city" class="form-control" required>
+                                <input type="text" name="town_city" value="{{ old('town_city') }}" class="form-control" required>
+                                @error('town_city')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>State  <span class="required">*</span></label>
-                                <input type="text" name="state_county" class="form-control" required>
+                                <input type="text" name="state_county" value="{{ old('state_county') }}" class="form-control" required>
+                                @error('state_county')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Postcode / Zip <span class="required">*</span></label>
-                                <input type="text" name="postcode_zip" class="form-control" required>
+                                <input type="text" name="postcode_zip" value="{{ old('postcode_zip') }}" class="form-control" required>
+                                @error('postcode_zip')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Email Address <span class="required">*</span></label>
-                                <input type="email" name="email" class="form-control" required>
+                                <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                                @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Phone <span class="required">*</span></label>
-                                <input type="text" name="phone" class="form-control" required>
+                                <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" required>
+                                @error('apartment')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror  @error('phone')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label>Order Notes</label>
-                                <textarea name="order_notes" class="form-control" rows="4" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                <textarea name="order_notes" class="form-control" value="{{ old('last_name') }}" rows="4" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                @error('order_notes')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                         </div>
                     </div>
@@ -629,6 +668,3 @@
 
     });
 </script>
-
-
-

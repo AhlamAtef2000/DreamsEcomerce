@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\ContactInfo;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -10,8 +12,10 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::latest()->paginate(10);
-        return view('admin.contacts.index', compact('contacts'));
+
+        $contactInfo = ContactInfo::first(); // Get all contact information
+        
+        return view('frontend.contact.index', compact('contactInfo'));
     }
 
     public function create()
@@ -21,13 +25,14 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
+    
         $request->validate([
-            'name' => 'required|string|regex:/^[a-zA-Z]+(\s[a-zA-Z]+)+$/|max:255',  
+            'name' => 'required|string|regex:/^[a-zA-Z]/|max:255',  
             'email' => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.)+com$/',  
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
         ]);
-     
+
 
         Contact::create([
             'name' => $request->name,
@@ -37,15 +42,12 @@ class ContactController extends Controller
         ]);
 
       
-        return redirect()->route('home')->with('success', 'Your message has been sent!');
+        return redirect()->back()->with('success', 'Your message has been sent!');
     }
 
   
 
-    public function show(Contact $contact)
-    {
-        return view('admin.contacts.show', compact('contact'));
-    }
+  
 
 
 

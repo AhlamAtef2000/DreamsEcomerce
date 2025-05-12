@@ -24,7 +24,26 @@
 <!-- Breadcrumb Section End -->
 
 <!-- Contact Us Section Start -->
+
 <div class="section section-margin">
+    <div class="d-flex justify-content-center mt-4">
+        <!-- Success Message -->
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="max-width: 500px; width: 100%; padding: 15px; border-radius: 10px;">
+                <strong>Success!</strong> {{ session('success') }}
+               
+            </div>
+        @endif
+    
+        <!-- Error Message -->
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="max-width: 500px; width: 100%; padding: 15px; border-radius: 10px;">
+                <strong>Error!</strong> {{ session('error') }}
+               
+            </div>
+        @endif
+    </div>
+    
     <div class="container">
         <div class="row mb-n10">
             <div class="col-12 col-lg-8 mb-10">
@@ -36,8 +55,9 @@
                 </div>
                 <!-- Section Title End -->
                 <!-- Contact Form Wrapper Start -->
+               
                 <div class="contact-form-wrapper contact-form">
-                    <form action="{{ route('user.contacts.store') }}" id="contact-form" method="post">
+                    <form action="{{ route('user.contact.store') }}"  method="post">
                         @csrf
                         <div class="row">
                             <div class="col-12">

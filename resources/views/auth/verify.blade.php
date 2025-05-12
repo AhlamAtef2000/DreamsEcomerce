@@ -1,80 +1,125 @@
-@extends('layouts.app')
+    <div class="wrapper" style="background-image: url('{{ asset('loginPage/images/bg-registration-form-2.jpg') }}');">
+        <div class="inner">
+            <div class="content-wrapper">
+                <div class="text-center mb-4">
+                    <h3 class="title mb-3">{{ __('Verify Your Email Address') }}</h3>
+                </div>
 
-@section('content')
-    <div class="section section-margin">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8">
-                    <!-- Verify Email Wrapper Start -->
-                    <div class="card shadow-lg rounded-lg">
-
-                        <!-- Card Header Start -->
-                        <div class="card-header text-center bg-primary text-white">
-                            <h3>{{ __('Verify Your Email Address') }}</h3>
-                        </div>
-                        <!-- Card Header End -->
-
-                        <!-- Card Body Start -->
-                        <div class="card-body p-5">
-
-                            @if (session('resent'))
-                                <div class="alert alert-success text-center" role="alert">
-                                    {{ __('A fresh verification link has been sent to your email address.') }}
-                                </div>
-                            @endif
-
-                            <div class="text-center mb-4">
-                                <p>{{ __('Before proceeding, please check your email for a verification link.') }}</p>
-                                <p>{{ __('If you did not receive the email') }},
-                                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                                        @csrf
-                                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-decoration-none">{{ __('click here to request another') }}</button>.
-                                    </form>
-                                </p>
-                            </div>
-
-                            <!-- Button to Go Home -->
-                            <div class="text-center">
-                                <a href="{{ url('/') }}" class="btn btn-primary w-100 py-2 rounded-pill">
-                                    {{ __('Go to Home') }}
-                                </a>
-                            </div>
-
-                        </div>
-                        <!-- Card Body End -->
-
+                @if (session('resent'))
+                    <div class="alert alert-success text-center" role="alert">
+                        {{ __('A fresh verification link has been sent to your email address.') }}
                     </div>
-                    <!-- Verify Email Wrapper End -->
+                @endif
+
+                <div class="text-center mb-4">
+                    <p>{{ __('Before proceeding, please check your email for a verification link.') }}</p>
+                    <p>{{ __('If you did not receive the email') }},
+                        <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                            @csrf
+                            <button type="submit" class="custom-button">{{ __('click here to request another') }}</button>
+                        </form>
+                    </p>
+                </div>
+
+                <!-- Button to Go Home -->
+                <div class="text-center">
+                    <a class="custom-button-home" href="{{ url('/') }}" >
+                        {{ __('Go to Home') }}
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-@endsection
 
-@section('styles')
     <style>
-        .card {
+        .wrapper {
+            background-image: url('{{ asset('loginPage/images/bg-registration-form-2.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .inner {
+            background-color: rgba(255, 255, 255, 0.85); /* White with some transparency */
             border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
         }
-        .card-header {
-            font-size: 1.5rem;
-            font-weight: 700;
+
+        .content-wrapper {
+            padding: 20px;
         }
-        .card-body {
-            background-color: #f8f9fa;
+
+        .title {
+            font-size: 32px;
+            color: #333;
         }
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            color: #fff;
-        }
+
         .alert-success {
             background-color: #d4edda;
             color: #155724;
-            border: 1px solid #c3e6cb;
+            border-color: #c3e6cb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .btn-dark {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 50px; /* Rounded Button */
+        }
+
+        .btn-dark:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .btn-link {
+            color: #007bff;
+        }
+
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+
+        .form-text {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        .custom-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Atlassian Sans' !important;        }
+        .custom-button:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .custom-button-home {
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Atlassian Sans' !important;
+
+        }
+        .custom-button-home:hover {
+            background-color: #333;
+            color: #fff;
         }
     </style>
-@endsection

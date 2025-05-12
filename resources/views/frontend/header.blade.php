@@ -111,7 +111,7 @@
                                 </li>
                                 <li><a href="{{ route('user.about') }}"> <span>About</span></a></li>
 
-                                <li><a href="{{ route('user.contact') }}"> <span>Contact</span></a></li>
+                                <li><a href="{{ route('user.contact.index') }}"> <span>Contact</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -277,7 +277,7 @@
                         </li>
 
                         <li><a href="{{ route('user.about') }}">About</a></li>
-                        <li><a href="{{ route('user.contact') }}">Contact</a></li>
+                        <li><a href="{{ route('user.contact.index') }}">Contact</a></li>
                     </ul>
                 </nav>
             </div>

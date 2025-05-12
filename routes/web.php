@@ -98,8 +98,8 @@ Route::get('/',[HomeController::class,'index']);
 Route::get('/home', [CartController::class, 'index'])->name('home'); // Home route
 
 
-Route::prefix('user')->name('user.')->group(function () {
-Route::get('/', [HomeController::class, 'index'])->name('home'); // Home route
+Route::prefix('user')->name('user.')->middleware(['auth', 'verified'])->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home'); // Home route
 Route::get('/contact', [ContactInfoController::class, 'showContactInfo'])->name('contact');
 Route::resource('favorites', FavouriteController::class);
 Route::get('/about', function () {
@@ -125,19 +125,19 @@ Route::post('/reviews/store', [FrontEndReviewController::class, 'store'])->name(
 Route::get('/user/review/{review}/edit', [FrontEndReviewController::class, 'edit'])->name('review.edit');
 Route::put('/user/reviews/{id}', [FrontEndReviewController::class, 'update'])->name('review.update');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::resource('contacts', FrontEndContactController::class);
 Route::get('/product-details/{id}', [ShopController::class, 'getProductDetails'])->name('product.details.ajax');
 Route::get('/category-products/{categoryId}', [ShopController::class, 'getCategoryProducts']);
+Route::resource('/contact', FrontEndContactController::class)->names('contact');
 
 
 });
-});
+});// ✅ fixed
 
 Route::get('/api/countries', [ShipmentController::class, 'getCountries']);
 Route::get('/shipping-methods/{countryId}', [ShipmentController::class, 'getShippingMethodsByCountry']);
 
 
-Route::get('/security-policy', function () {
-        return view('security-policy');
-    });
+// Route::get('/security-policy', function () {
+//         return view('security-policy');
+//     });
     

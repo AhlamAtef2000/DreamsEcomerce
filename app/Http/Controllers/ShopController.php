@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 class ShopController extends Controller
 {
 
@@ -61,10 +62,13 @@ class ShopController extends Controller
             $products->orderBy('created_at', 'desc');
             break;
         case '2': // Sort by average rating
+           
             $products = Product::leftJoin('reviews', 'products.id', '=', 'reviews.product_id')
-                ->selectRaw('products.*, AVG(reviews.rating) as avg_rating')
-                ->groupBy('products.id')
-                ->orderByDesc('avg_rating');
+            ->select('products.id', 'products.category_id', 'products.name', 'products.price', 'products.created_at', 'products.updated_at', DB::raw('AVG(reviews.rating) as avg_rating'))
+            ->groupBy('products.id', 'products.category_id', 'products.name', 'products.price', 'products.created_at', 'products.updated_at')
+            ->orderByDesc('avg_rating');
+
+
             break;
         case '3': // Sort by price low to high
             $products->orderBy('price', 'asc');

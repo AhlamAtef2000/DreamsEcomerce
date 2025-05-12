@@ -70,7 +70,7 @@
                             <a href="#">Pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                             <ul class="dropdown">
                                 <li><a href="{{ route('user.about') }}">About Us</a></li>
-                                <li><a href="{{ route('user.contact') }}">Contact</a></li>
+                                <li><a href="{{ route('user.contact.index') }}">Contact</a></li>
                                 <li><a href="faq.html">Faq</a></li>
                                 <li><a href="404-error.html">Error 404</a></li>
                                 <li><a href="my-account.html">My Account</a></li>
@@ -86,7 +86,7 @@
                             </ul>
                         </li>
                         <li><a href="{{ route('user.about') }}">About</a></li>
-                        <li><a href="{{ route('user.contact') }}">Contact</a></li>
+                        <li><a href="{{ route('user.contact.index') }}">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -722,9 +722,9 @@
                                                         </span>
             
                                                         <span class="price">
-                                                            <span class="old">{{ number_format($dailyProduct->price, 2) }} JOD</span>
+                                                            <span class="old me-1">{{ number_format($dailyProduct->price + ($dailyProduct->price * $dailyProduct->discount_percentage / 100), 2) }} JOD</span>
                                                             @if ($dailyProduct->discount_percentage)
-                                                                <span class="new">{{ number_format($dailyProduct->price * (1 - $dailyProduct->discount_percentage / 100), 2) }} JOD</span>
+                                                                <span class="new me-1">{{ number_format($dailyProduct->price) }} JOD</span>
                                                             @endif
                                                         </span>
                                                     </div>

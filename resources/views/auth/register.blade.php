@@ -1,134 +1,150 @@
-@extends('layouts.app')
+<!-- MATERIAL DESIGN ICONIC FONT -->
+<link rel="stylesheet" href="{{ asset('loginPage/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css') }}">
+		
+<!-- STYLE CSS -->
+<link rel="stylesheet" href="{{ asset('loginPage/css/style.css') }}">
 
-@section('content')
-    <div class="section section-margin">
-        <div class="container">
+    <div class="wrapper" style="background-image: url('{{ asset('loginPage/images/bg-registration-form-2.jpg') }}');">
+        <div class="inner">
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+                <h3>Registration Form</h3>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8 col-sm-10">
-                    <!-- Register Wrapper Start -->
-                    <div class="login-wrapper p-5 shadow-lg rounded-lg">
+                <!-- First Name and Last Name Fields -->
+                    <div class="form-wrapper">
+                        <label for="name">First Name</label>
+                        <input type="text"class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" required>
+                        <small id="name-feedback"  class="form-text"></small> <!-- Feedback Message -->
 
-                        <!-- Register Title & Content Start -->
-                        <div class="section-content text-center mb-4">
-                            <h2 class="title mb-3 font-weight-bold">{{ __('Register') }}</h2>
-                            <p class="desc-content text-muted">Create your account below and get started.</p>
-                        </div>
-                        <!-- Register Title & Content End -->
-
-                        <!-- Form Action Start -->
-                        <form method="POST" action="{{ route('register') }}">
-                            @csrf
-
-                            <!-- Input Name Start -->
-                            <div class="single-input-item mb-4">
-                                <label for="name" class="form-label">{{ __('Name') }}</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Your Name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <!-- Input Name End -->
-
-                            <!-- Input Email Start -->
-                            <div class="single-input-item mb-4">
-                                <label for="email" class="form-label">{{ __('Email Address') }}</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Your Email" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                @error('email')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <!-- Input Email End -->
-
-                            <!-- Input Password Start -->
-                            <div class="single-input-item mb-4">
-                                <label for="password" class="form-label">{{ __('Password') }}</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Enter your Password">
-                                @error('password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <!-- Input Password End -->
-
-                            <!-- Confirm Password Start -->
-                            <div class="single-input-item mb-4">
-                                <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
-                                <input type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
-                            </div>
-                            <!-- Confirm Password End -->
-
-                            <!-- Register Button Start -->
-                            <div class="single-input-item mb-4">
-                                <button type="submit" class="btn btn-dark w-100 py-2 rounded-pill">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                            <!-- Register Button End -->
-
-                        </form>
-                        <!-- Form Action End -->
-
-                        <!-- Login Link Start -->
-                        <div class="text-center">
-                            <p class="text-muted">Already have an account? <a href="{{ route('login') }}" class="font-weight-bold">Login Here</a></p>
-                        </div>
-                        <!-- Login Link End -->
-
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <!-- Register Wrapper End -->
-                </div>
-            </div>
 
+                   
+
+                <!-- Email Field -->
+                <div class="form-wrapper">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email') }}" required>
+                    <small id="email-feedback"  class="form-text"></small> <!-- Feedback Message -->
+
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-wrapper">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" required autocomplete="new-password">
+                    <small id="password-feedback"  class="form-text"></small> <!-- Feedback Message -->
+
+                    @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="form-wrapper">
+                    <label for="password_confirmation">Confirm Password</label>
+                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required autocomplete="new-password">
+                    <small id="confirm-password-feedback"  class="form-text"></small> <!-- Feedback Message -->
+
+                </div>
+
+                <!-- Terms and Conditions Checkbox -->
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="terms" required> I accept the Terms of Use & Privacy Policy.
+                        <span class="checkmark"></span>
+                        <small id="terms-feedback"  class="form-text"></small> <!-- Feedback Message -->
+
+                    </label>
+                </div>
+
+                <!-- Register Button -->
+                <button type="submit" class="btn btn-dark w-100 py-2 rounded-pill">Register Now</button>
+            </form>
         </div>
     </div>
-@endsection
 
-@section('styles')
-    <style>
-        /* Custom styling for register page */
-        .login-wrapper {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .title {
-            font-size: 32px;
-            color: #333;
-        }
-        .desc-content {
-            font-size: 14px;
-            color: #6c757d;
-        }
-        .single-input-item input {
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
-        .single-input-item input:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-        }
-        .btn-dark {
-            background-color: #007bff;
-            color: #fff;
-        }
-        .btn-dark:hover {
-            background-color: #0056b3;
-            color: #fff;
-        }
-        .invalid-feedback {
-            font-size: 12px;
-            color: #e74a3b;
-        }
-        .text-muted {
-            font-size: 13px;
-        }
-    </style>
-@endsection
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var submitButton = document.querySelector('button[type="submit"]');
+            submitButton.disabled = true; // Disable the submit button by default
+    
+            // First Name Validation
+            document.getElementById('name').addEventListener('input', function () {
+                var nameInput = this.value;
+                var regex = /^[a-zA-Z\s]+$/; // Only letters and spaces allowed
+                var feedback = document.getElementById('name-feedback');
+                if (regex.test(nameInput)) {
+                    feedback.innerHTML = "<i class='fa fa-check' style='color: green;'></i> Valid name!";
+                    submitButton.disabled = false; // Enable submit button
+                } else {
+                    feedback.innerHTML = "<i class='fa fa-times' style='color: red;'></i> Invalid name. Only letters and spaces are allowed.";
+                    submitButton.disabled = true; // Disable submit button
+                }
+            });
+    
+           
+    
+            // Email Validation
+            document.getElementById('email').addEventListener('input', function () {
+                var emailInput = this.value;
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email validation regex
+                var emailFeedback = document.getElementById('email-feedback');
+                if (emailRegex.test(emailInput)) {
+                    emailFeedback.innerHTML = "<i class='fa fa-check' style='color: green;'></i> Valid email!";
+                    submitButton.disabled = false;
+                } else {
+                    emailFeedback.innerHTML = "<i class='fa fa-times' style='color: red;'></i> Invalid email format.";
+                    submitButton.disabled = true;
+                }
+            });
+    
+            // Password Validation
+            document.getElementById('password').addEventListener('input', function () {
+                var passwordInput = this.value;
+                var passwordFeedback = document.getElementById('password-feedback');
+                var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Password must be at least 8 characters long, include letters and numbers
+                if (passwordRegex.test(passwordInput)) {
+                    passwordFeedback.innerHTML = "<i class='fa fa-check' style='color: green;'></i> Strong password!";
+                    submitButton.disabled = false;
+                } else {
+                    passwordFeedback.innerHTML = "<i class='fa fa-times' style='color: red;'></i> Weak password. At least 8 characters and must contain letters and numbers.";
+                    submitButton.disabled = true;
+                }
+            });
+    
+            // Confirm Password Validation
+            document.getElementById('password_confirmation').addEventListener('input', function () {
+                var confirmPasswordInput = this.value;
+                var passwordInput = document.getElementById('password').value;
+                var confirmPasswordFeedback = document.getElementById('confirm-password-feedback');
+                if (confirmPasswordInput === passwordInput) {
+                    confirmPasswordFeedback.innerHTML = "<i class='fa fa-check' style='color: green;'></i> Passwords match!";
+                    submitButton.disabled = false;
+                } else {
+                    confirmPasswordFeedback.innerHTML = "<i class='fa fa-times' style='color: red;'></i> Passwords do not match.";
+                    submitButton.disabled = true;
+                }
+            });
+    
+            // Terms & Conditions Checkbox Validation
+            document.querySelector('input[name="terms"]').addEventListener('change', function () {
+                var termsChecked = this.checked;
+                var termsFeedback = document.getElementById('terms-feedback');
+                if (termsChecked) {
+                    termsFeedback.innerHTML = "<i class='fa fa-check' style='color: green;'></i> You have accepted the Terms.";
+                    submitButton.disabled = false;
+                } else {
+                    termsFeedback.innerHTML = "<i class='fa fa-times' style='color: red;'></i> You must accept the Terms.";
+                    submitButton.disabled = true;
+                }
+            });
+        });
+    </script>
+    

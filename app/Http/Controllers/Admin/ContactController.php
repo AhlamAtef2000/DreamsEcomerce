@@ -22,13 +22,11 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|regex:/^[a-zA-Z]+(\s[a-zA-Z]+)+$/|max:255',  
-            'email' => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.)+com$/', 
+            'name' => 'required|string|regex:/^[a-zA-Z]/|max:255',  
+            'email' => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.)+com$/',  
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
         ]);
-        
-
         Contact::create($request->all());
 
         return redirect()->route('home');

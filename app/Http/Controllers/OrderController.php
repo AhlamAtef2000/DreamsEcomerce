@@ -44,17 +44,18 @@ class OrderController extends Controller
 
         $request->user_id = Auth::user()->id;
 
-        $request->validate([
+        $validated = $request->validate([
             'country' => 'required|string',
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'first_name' => 'required|regex:/^[a-zA-Z\s]+$/', // Only letters and spaces
+            'last_name' => 'required|regex:/^[a-zA-Z\s]+$/',  // Only letters and spaces
             'address' => 'required|string',
             'town_city' => 'required|string',
             'state_county' => 'required|string',
-            'postcode_zip' => 'required|string',
+            'phone' => 'required|string|regex:/^(\+962|962)?(7[7-9][0-9]{7})$/',
             'email' => 'required|email',
-            'phone' => 'required|string',
+            'phone' => 'required|string|regex:/^[0-9]{10}$/',  // Example regex for 10-digit phone numbers
             'payment_method' => 'required|in:bank,cheque,paypal,cod',
+            'shipping_method_id' => 'required|exists:shipping_methods,id',  // Assuming shipping methods are stored in a `shipping_methods` table
         ]);
 
 
@@ -120,11 +121,12 @@ class OrderController extends Controller
             if ($shippmentMethod) {
                 $shippmentMethodCost = $shippmentMethod->price;
             }
+
            
             shipment::create([
                 'order_id' => $order->id,
                 'shipping_address' => $request->address,
-                'shipping_method' => $request->shipping_method_id,
+                'shipping_method' => $shippmentMethod->name,
                 'shipping_cost' => $shippmentMethodCost ?? 0,
                 'tracking_number' => AdminOrderController::generateTrackingNumber(),
                 'shipment_status' => 'pending',

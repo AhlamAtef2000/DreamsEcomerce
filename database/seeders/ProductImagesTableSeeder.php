@@ -34,7 +34,7 @@ class ProductImagesTableSeeder extends Seeder
                 ],
                 [
                     'product_id' =>6,
-                    'image_path' => 'product\Men Slim Fit T-Shirt.jpg',
+                    'image_path' => 'product\mensporttshirt.jpg',
                 ],
                 [
                     'product_id' => 7,

@@ -55,11 +55,18 @@ class ProductController extends Controller
 
 
 
+        $price= $request->price;
+
+        if ($request->has('price') && $request->discount_percentage > 0 && !empty($request->sale_end_date)) {
+            $price = $request->price - ( $price * ($request->discount_percentage / 100));
+        }
+        
+        
         // Create the product
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
-            'price' => $request->price,
+            'price' => $price,
             'stock' => $request->stock,
             'category_id' => $request->category_id,
             'is_on_sale' => $request->is_on_sale ? 1 : 0,
@@ -121,11 +128,17 @@ class ProductController extends Controller
 
         ]);
 
+        $price= $request->price;
+
+        if ($request->has('price') && $request->discount_percentage > 0 && !empty($request->sale_end_date)) {
+            $price = $request->price - ( $price * ($request->discount_percentage / 100));
+        }
+
         // Update basic product info
         $product->update([
             'name' => $request->name,
             'description' => $request->description,
-            'price' => $request->price,
+            'price' => $price,
             'stock' => $request->stock,
             'category_id' => $request->category_id,
             'is_on_sale' => $request->is_on_sale ? 1 : 0,

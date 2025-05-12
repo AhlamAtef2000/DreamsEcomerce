@@ -8,13 +8,13 @@
                     <div class="single-footer-widget">
                         <h2 class="widget-title">Contact Us</h2>
                         <p class="desc-content">Your best choice for an enjoyable shopping experience at affordable prices.</p>
-                        <!-- user.contact Address Start -->
+                        <!-- user.contact.index Address Start -->
                         <ul class="widget-address">
                             <li><span>Address: </span>Al-Jubeiha, Shaher Abu Haya Street,  Amman - Jordan</li>
                             <li><span>Call to: </span> <a href="#"> (962)770727654</a></li>
                             <li><span>Mail to: </span> <a href="#">khashashnehahlam@gamil.com</a></li>
                         </ul>
-                        <!-- user.contact Address End -->
+                        <!-- user.contact.index Address End -->
 
                         <!-- Soclial Link Start -->
                         <div class="widget-social justify-content-start mt-4">
@@ -47,10 +47,10 @@
                         <ul class="widget-list">
                             <li><a href="account.html">My Account</a></li>
                             <li><a href="{{ route('user.favorites.index') }}">Wishlist</a></li>
-                            <li><a href="{{ route('user.contact') }}">Newsletter</a></li>
-                            <li><a href="{{ route('user.contact') }}">Help Center</a></li>
-                            <li><a href="{{ route('user.contact') }}">Conditin</a></li>
-                            <li><a href="{{ route('user.contact') }}">Term Of Use</a></li>
+                            <li><a href="{{ route('user.contact.index') }}">Newsletter</a></li>
+                            <li><a href="{{ route('user.contact.index') }}">Help Center</a></li>
+                            <li><a href="{{ route('user.contact.index') }}">Conditin</a></li>
+                            <li><a href="{{ route('user.contact.index') }}">Term Of Use</a></li>
                         </ul>
                     </div>
                 </div>

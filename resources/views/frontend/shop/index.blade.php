@@ -146,7 +146,7 @@
 
                                     <!-- Price -->
                                     <span class="price">
-                                        <span class="new">JOD{{ number_format($product->price, 2) }}</span>
+                                        <span class="new">JOD{{ $product->price}}</span>
                                     </span>
 
                                     <!-- Action Buttons -->

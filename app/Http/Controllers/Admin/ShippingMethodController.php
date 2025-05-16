@@ -44,7 +44,7 @@ class ShippingMethodController extends Controller
     // Handle case where shipping method doesn't exist
     if (!$shippingMethod) {
         return redirect()->route('admin.shippingMethods.index')
-                         ->with('error', 'Shipping method not found.');
+                            ->with('error', 'Shipping method not found.');
     }
 
     // Update the shipping method

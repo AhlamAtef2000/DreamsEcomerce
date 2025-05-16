@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 class ShopController extends Controller
 {
+   
 
     public function index(Request $request)
 {
@@ -62,7 +63,7 @@ class ShopController extends Controller
             $products->orderBy('created_at', 'desc');
             break;
         case '2': // Sort by average rating
-           
+
             $products = Product::leftJoin('reviews', 'products.id', '=', 'reviews.product_id')
             ->select('products.id', 'products.category_id', 'products.name', 'products.price', 'products.created_at', 'products.updated_at', DB::raw('AVG(reviews.rating) as avg_rating'))
             ->groupBy('products.id', 'products.category_id', 'products.name', 'products.price', 'products.created_at', 'products.updated_at')
@@ -70,14 +71,21 @@ class ShopController extends Controller
 
 
             break;
-        case '3': // Sort by price low to high
-            $products->orderBy('price', 'asc');
-            break;
-        case '4': // Sort by price high to low
-            $products->orderBy('price', 'desc');
-            break;
-        default:
-            break;
+            case '3': // Sort by Latest (created_at desc)
+                $products->orderBy('created_at', 'desc');
+                break;
+        
+            case '4': // Sort by Price (Low to High)
+                $products->orderBy('price', 'asc');
+                break;
+        
+            case '5': // Sort by Price (High to Low)
+                $products->orderBy('price', 'desc');
+                break;
+        
+            default:
+
+                break;
     }
 
     // Paginate the products with the requested perPage value

@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cart_id')->constrained()->onDelete('cascade'); // ربط بالسلة
-            $table->foreignId('product_id')->constrained()->onDelete('cascade'); // ربط بالمنتج
-            $table->foreignId('size_id')->constrained()->onDelete('cascade'); // Linking to size
-            $table->foreignId('color_id')->constrained()->onDelete('cascade'); // Linking to color
-            $table->foreignId('material_id')->constrained()->onDelete('cascade'); // Linking to material
-            $table->integer('quantity')->default(1); // الكمية الافتراضية 1
-            $table->decimal('price', 10, 2); // سعر المنتج وقت الإضافة
+            $table->foreignId('cart_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade'); 
+            $table->foreignId('size_id')->constrained()->onDelete('cascade'); 
+            $table->foreignId('color_id')->constrained()->onDelete('cascade');
+            $table->foreignId('material_id')->constrained()->onDelete('cascade');
+            $table->integer('quantity')->default(1); 
+            $table->decimal('price', 10, 2); 
             $table->SoftDeletes();
             $table->timestamps();
         });

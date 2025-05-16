@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->id();
-            $table->string('picture'); // Store icon class or image URL
-            $table->string('title'); // Feature title
-            $table->string('description'); // Short description
-
+            $table->string('picture'); 
+            $table->string('title'); 
+            $table->string('description'); 
             $table->timestamps();
         });
     }

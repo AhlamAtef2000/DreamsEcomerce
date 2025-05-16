@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name'); // name
             $table->string('slug')->unique(); // slug for URL
-            $table->text('description')->nullable(); // optional description
+            $table->text('description')->nullable(); 
             $table->softDeletes(); // Soft delete column
             $table->timestamps();
         });

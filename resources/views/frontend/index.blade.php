@@ -257,7 +257,7 @@
                                                     <a href="{{ route('user.single-product', $product->id) }}" style="color: #444;">{{ $product->name }}</a>
                                                 </h5>
                                                 <span class="price" style="font-size: 18px; color: #e74c3c; font-weight: bold;">
-                                                    <span class="new">JOD{{ number_format($product->price, 2) }}</span>
+                                                    <span class="new">JOD{{ $product->price, 2}}</span>
                                                 </span>
                                                 <div class="ratings" style="margin-top: 5px; display: flex; justify-content: center;">
                                                     @php
@@ -381,7 +381,7 @@
 
                                                         <span class="price">
                                                             <span
-                                                                class="new">{{ number_format($newArrival->price, 2) }}
+                                                                class="new">{{ $newArrival->price }}
                                                                 JOD</span>
                                                         </span>
 
@@ -493,7 +493,7 @@
                                                         <!-- Price -->
                                                         <span class="price">
                                                             <span
-                                                                class="new">{{ number_format($bestSeller->price, 2) }}
+                                                                class="new">{{ $bestSeller->price }}
                                                                 JOD</span>
                                                         </span>
 
@@ -594,8 +594,8 @@
 
                                                         <!-- Price -->
                                                         <span class="price">
-                                                            <span class="new">{{ number_format($saleItem->price, 2) }}
-                                                                JOD</span>
+                                                            <span class="new">{{ $saleItem->price }}
+                                                                JOD</span>  
                                                         </span>
 
                                                         <div class="shop-list-btn mt-3">
@@ -722,9 +722,9 @@
                                                         </span>
             
                                                         <span class="price">
-                                                            <span class="old me-1">{{ number_format($dailyProduct->price + ($dailyProduct->price * $dailyProduct->discount_percentage / 100), 2) }} JOD</span>
+                                                            <span class="old me-1">{{ $dailyProduct->price + ($dailyProduct->price * $dailyProduct->discount_percentage / 100) }} JOD</span>
                                                             @if ($dailyProduct->discount_percentage)
-                                                                <span class="new me-1">{{ number_format($dailyProduct->price) }} JOD</span>
+                                                                <span class="new me-1">{{ $dailyProduct->price }} JOD</span>
                                                             @endif
                                                         </span>
                                                     </div>

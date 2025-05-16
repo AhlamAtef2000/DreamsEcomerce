@@ -11,14 +11,14 @@ class Coupon extends Model
 
      protected $fillable = [
         'code',
-        'discount_type',  // 'fixed' or 'percentage'
-        'amount',         // Discount amount
-        'user_id',        // Optional if coupons are user-specific
+        'discount_type',  
+        'amount',       
+        'user_id',       
         'valid_from',
         'valid_until'
     ];
 
-    // Define the relation to the Product model (if needed)
+   
     public function products()
     {
         return $this->belongsToMany(Product::class);

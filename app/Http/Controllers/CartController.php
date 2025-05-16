@@ -18,6 +18,12 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function __construct()
+{
+    $this->middleware(['auth', 'verified']);
+}
+
     public function index()
     {
 
@@ -117,43 +123,58 @@ class CartController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'cart_item_id' => 'required|exists:cart_items,id',
-            'quantity_no' => 'required|integer|min:1',
-            'color_id' => 'required|exists:colors,id',
-            'size_id' => 'required|exists:sizes,id',
-            'material_id' => 'required|exists:materials,id',
+            'cart_items' => 'required|array',
+            'cart_items.*.quantity' => 'required|integer|min:1',
+            'cart_items.*.color_id' => 'required|exists:colors,id',
+            'cart_items.*.size_id' => 'required|exists:sizes,id',
+            'cart_items.*.material_id' => 'required|exists:materials,id',
         ]);
-        $cartItem = CartItem::findOrFail($request->cart_item_id);
-        $cartItem->quantity = $request->quantity_no;
-        $cartItem->color_id = $request->color_id;
-        $cartItem->size_id = $request->size_id;
-        $cartItem->material_id = $request->material_id;
-        $cartItem->save();
-        return redirect()->route('user.checkout');
+    
+        foreach ($request->cart_items as $id => $data) {
+            $cartItem = CartItem::find($id);
+            if ($cartItem) {
+                $cartItem->quantity = $data['quantity'];
+                $cartItem->color_id = $data['color_id'];
+                $cartItem->size_id = $data['size_id'];
+                $cartItem->material_id = $data['material_id'];
+                $cartItem->save();
+            }
+        }
+    
+        return redirect()->route('user.checkout')->with('success', 'Cart updated successfully.');
     }
-
+    
 
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         // Find the cart item by its ID
         $cartItem = CartItem::find($id);
-
-        // Check if the cart item exists
+    
         if ($cartItem) {
             // Delete the cart item
             $cartItem->delete();
-
-            // Redirect back to the cart page or wherever you want
+    
+            // If request expects JSON (AJAX), return JSON response
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Item removed from cart.']);
+            }
+    
+            // Otherwise redirect back with success message
             return redirect()->route('user.cart.index')->with('success', 'Item removed from cart.');
         }
-
-        // If cart item not found, return back with an error message
+    
+        // If cart item not found
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Item not found.'], 404);
+        }
+    
         return redirect()->route('user.cart.index')->with('error', 'Item not found.');
     }
+    
 
 }

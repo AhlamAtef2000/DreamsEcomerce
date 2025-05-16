@@ -33,10 +33,13 @@
                 @else
 
                 <div class="cart-table table-responsive">
+                    <form action="{{ route('user.cart.update') }}" method="POST">
+                        @csrf
                     <table class="table table-bordered" >
                         <!-- Table Head Start -->
                         <thead>
                             <tr>
+                                <th style="display:none"></th>
                                 <th class="pro-id">#</th>
                                 <th class="pro-thumbnail">Image</th>
                                 <th class="pro-title">Product</th>
@@ -54,6 +57,19 @@
                         <tbody>
                             @foreach($cartItems as $cartItem)
                             <tr data-cart-item-id="{{ $cartItem->id }}" data-price="{{ $cartItem->price }}">
+                                <td class="pro-quantity" style="display:none">
+                                    <input
+                                        type="hidden"
+                                        min="1"
+                                        class="cart-plus-minus-box hidden-quantity"
+
+                                        name="cart_items[{{ $cartItem->id }}][quantity]"
+                                        value="{{ $cartItem->quantity }}"
+                                    >
+                                    <input type="hidden" name="cart_items[{{ $cartItem->id }}][color_id]" value="{{ $cartItem->color_id }}">
+                                    <input type="hidden" name="cart_items[{{ $cartItem->id }}][size_id]" value="{{ $cartItem->size_id }}">
+                                    <input type="hidden" name="cart_items[{{ $cartItem->id }}][material_id]" value="{{ $cartItem->material_id }}">
+                                </td>
                                 <td class="pro-id">
                                     <a href="#">{{$cartItem->id}}</a>
                                 </td>
@@ -77,34 +93,61 @@
                                     <span>{{ $cartItem->material->name }}</span> <!-- Display material -->
                                 </td>
                                 <td class="pro-price">
-                                    <span>JOD{{ number_format($cartItem->price, 2) }}</span>
+                                    <span>JOD{{ $cartItem->price }}</span>
                                 </td>
                                 <td class="pro-quantity">
                                     <div class="quantity">
                                         <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="{{ $cartItem->quantity }}" type="number" min="1">
+                                            <input class="cart-plus-minus-box visible-quantity" value="{{ $cartItem->quantity }}" type="number" min="1">
                                             <div class="dec qtybutton">-</div>
                                             <div class="inc qtybutton">+</div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="pro-subtotal">
-                                    <span class="subtotal">JOD{{ number_format($cartItem->quantity * $cartItem->price, 2) }}</span>
+                                    <span class="subtotal">JOD{{ $cartItem->quantity * $cartItem->price }}</span>
                                 </td>
                                 <td class="pro-remove">
-                                    <form action="{{ route('user.cart.remove', $cartItem->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="pe-7s-trash"></i>
-                                        </button>
-                                    </form>
+                                    <button type="button"  class="btn btn-danger btn-sm btn-remove-cart-item" data-id="{{ $cartItem->id }}">
+                                        <i class="pe-7s-trash"></i>
+                                    </button>
+                                    
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                         <!-- Table Body End -->
+                        <tfoot>
+                            <tr>
+                              <td colspan="10" style="padding: 20px;">
+                                <div style="max-width: 300px; margin: 0 auto; text-align: center;">
+                                  
+                                  @if(!$cartItems->isEmpty())
+                                    <div class="cart-calculator-wrapper" style="background-color: #F6EBE3; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                      <h3 class="title mb-3">Cart Totals</h3>
+                                      <div class="table-responsive">
+                                        <table class="table mb-0">
+                                          <tr>
+                                            <td>Total</td>
+                                            <td id="cart-total" style="font-weight: bold;">JOD{{ number_format($subtotal + $shipping, 2) }}</td>
+                                          </tr>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  @endif
+                          
+                                  <button type="submit" class="btn btn-dark btn-hover-primary rounded-0 w-100" style="font-size: 1.1rem; padding: 12px 0;">
+                                    Proceed To Checkout
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          </tfoot>
+                          
+                    </form>
+                    
                     </table>
+                    
                 </div>
 
                 <!-- Cart Table End -->
@@ -114,40 +157,7 @@
         </div>
 
         <!-- Cart Total Section -->
-        @if(!$cartItems->isEmpty())
-
-        <div class="row" >
-            <div class="col-lg-5 ms-auto col-custom" >
-                <div class="cart-calculator-wrapper" >
-                    <div class="cart-calculate-items" style="background-color: #F6EBE3;">
-                        <h3 class="title">Cart Totals</h3>
-                        <div class="table-responsive">
-                            <table class="table">
-
-                                <tr>
-                                    <td>Total</td>
-                                    <td id="cart-total">JOD{{ number_format($subtotal + $shipping, 2) }}</td>
-                                </tr>
-                            </table>
-
-                        </div>
-                    </div>
-
-<form action="{{ route('user.cart.update') }}" method="POST">
-    @csrf
-    <input type="hidden" id="quantity_no" name="quantity_no" >
-    <input type="hidden" id="cart_item_id" name="cart_item_id" >
-    <input type="hidden" id="color_id" value="{{$cartItem->color_id}}" name="color_id" >
-    <input type="hidden" id="size_id" value="{{$cartItem->size_id}}" name="size_id" >
-    <input type="hidden" id="material_id" value="{{$cartItem->material_id}}" name="material_id" >
-    <button type="submit" class="btn btn-dark btn-hover-primary rounded-0 w-100">
-        Proceed To Checkout
-    </button>
-</form>
-                </div>
-            </div>
-        </div>
-        @endif
+      
 
     </div>
 </div>
@@ -158,99 +168,119 @@
 @section('incrementScript')
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    let isProgrammaticChange = false;
 
-    const updateItemSubtotal = (itemRow) => {
-        const price = parseFloat(itemRow.dataset.price);
-        const quantityInput = itemRow.querySelector('.cart-plus-minus-box');
+const updateItemSubtotal = (itemRow) => {
+    const price = parseFloat(itemRow.dataset.price);
+    const quantityInput = itemRow.querySelector('input.visible-quantity');
+    const quantity = parseInt(quantityInput.value);
+    const subtotalElement = itemRow.querySelector('.pro-subtotal .subtotal');
+    subtotalElement.textContent = `JOD${(price * quantity).toFixed(2)}`;
+
+    // مزامنة الحقل المخفي مع الحقل الظاهر
+    const hiddenQuantityInput = itemRow.querySelector('input.cart-plus-minus-box.hidden-quantity');
+    if(hiddenQuantityInput){
+        hiddenQuantityInput.value = quantity;
+    }
+};
+
+const updateCartTotal = () => {
+    let total = 0;
+    document.querySelectorAll('[data-cart-item-id]').forEach(row => {
+        const price = parseFloat(row.dataset.price);
+        const quantityInput = row.querySelector('input.visible-quantity');
         const quantity = parseInt(quantityInput.value);
-        const subtotalElement = itemRow.querySelector('.pro-subtotal .subtotal');
-        const newSubtotal = (price * quantity).toFixed(2);
-        subtotalElement.textContent = `JOD${newSubtotal}`;
-    };
-
-    const updateCartTotal = () => {
-        const itemRows = document.querySelectorAll('[data-cart-item-id]');
-        let total = 0;
-        itemRows.forEach(row => {
-            const price = parseFloat(row.dataset.price);
-            const quantityInput = row.querySelector('.cart-plus-minus-box');
-            const quantity = parseInt(quantityInput.value);
-            total += price * quantity;
-        });
-
-        const shipmentElement = document.getElementById('shipment');
-        let shipping = 0;
-        if (shipmentElement) {
-            shipping = parseFloat(shipmentElement.textContent.replace('JOD', '')) || 0;
-        }
-
-        const cartTotalElement = document.getElementById('cart-total');
-        if (cartTotalElement) {
-            cartTotalElement.textContent = `JOD${(total + shipping).toFixed(2)}`;
-        }
-    };
-
-    const updateHiddenFields = (itemRow) => {
-        const cartItemId = itemRow.dataset.cartItemId;
-        const quantityInput = itemRow.querySelector('.cart-plus-minus-box');
-        const quantity = quantityInput ? quantityInput.value : 1;
-
-        // Set the values of the hidden inputs using their id
-        const hiddenQuantity = document.getElementById('quantity_no');
-        const hiddenCartItemId = document.getElementById('cart_item_id');
-
-        // Debugging: log to check if values are correct
-        console.log('Updating hidden fields for Item:', cartItemId, 'Quantity:', quantity);
-
-        if (hiddenQuantity) hiddenQuantity.value = quantity;
-        if (hiddenCartItemId) hiddenCartItemId.value = cartItemId;
-    };
-
-    // Initialize hidden inputs on page load
-    document.querySelectorAll('[data-cart-item-id]').forEach(itemRow => {
-        updateItemSubtotal(itemRow);
-        updateHiddenFields(itemRow);
+        total += price * quantity;
     });
 
-    // Handle + / - buttons
-    document.querySelector('.cart-table').addEventListener('click', (e) => {
-        if (e.target.classList.contains('qtybutton')) {
-            const button = e.target;
-            const itemRow = button.closest('tr');
-            const quantityInput = itemRow.querySelector('.cart-plus-minus-box');
-            let currentQuantity = parseInt(quantityInput.value);
+    const shipmentElement = document.getElementById('shipment');
+    let shipping = 0;
+    if (shipmentElement) {
+        shipping = parseFloat(shipmentElement.textContent.replace('JOD', '')) || 0;
+    }
 
-            if (button.classList.contains('inc')) {
-                currentQuantity += 1;
-            } else if (button.classList.contains('dec') && currentQuantity > 1) {
-                currentQuantity -= 1;
+    const cartTotalElement = document.getElementById('cart-total');
+    if (cartTotalElement) {
+        cartTotalElement.textContent = `JOD${(total + shipping).toFixed(2)}`;
+    }
+};
+
+document.querySelector('.cart-table').addEventListener('click', (e) => {
+    if (e.target.classList.contains('qtybutton')) {
+        const button = e.target;
+        const itemRow = button.closest('tr');
+        const quantityInput = itemRow.querySelector('input.visible-quantity');
+        let currentQuantity = parseInt(quantityInput.value);
+
+        if (button.classList.contains('inc')) {
+            currentQuantity += 1;
+        } else if (button.classList.contains('dec') && currentQuantity > 1) {
+            currentQuantity -= 1;
+        }
+
+        quantityInput.value = currentQuantity;
+
+        updateItemSubtotal(itemRow);
+        updateCartTotal();
+    }
+});
+
+document.querySelector('.cart-table').addEventListener('input', (e) => {
+    if (e.target.classList.contains('visible-quantity')) {
+        const itemRow = e.target.closest('tr');
+        updateItemSubtotal(itemRow);
+        updateCartTotal();
+    }
+});
+
+// تهيئة العرض عند تحميل الصفحة
+document.querySelectorAll('[data-cart-item-id]').forEach(row => {
+    updateItemSubtotal(row);
+});
+updateCartTotal();
+
+});
+
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+    document.querySelectorAll('.btn-remove-cart-item').forEach(button => {
+        button.addEventListener('click', function() {
+            const cartItemId = this.dataset.id;
+            console.log(cartItemId);
+
+            if (!confirm('Are you sure you want to remove this item from the cart?')) {
+                return;
             }
 
-            isProgrammaticChange = true;
-            quantityInput.value = currentQuantity;
-
-            updateItemSubtotal(itemRow);
-            updateCartTotal();
-            updateHiddenFields(itemRow);
-
-            setTimeout(() => { isProgrammaticChange = false }, 100);
-        }
+            fetch(`/user/cart/${cartItemId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Optionally remove the item's row from the table or reload page
+                    this.closest('tr').remove();
+                    alert('Item removed successfully.');
+                } else {
+                    console.error('Failed to remove item:', response);
+                    alert('Failed to remove item.');
+                }
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error removing item.');
+            });
+        });
     });
-
-    // Handle manual input
-    document.querySelector('.cart-table').addEventListener('input', (e) => {
-        if (e.target.classList.contains('cart-plus-minus-box') && !isProgrammaticChange) {
-            const itemRow = e.target.closest('tr');
-            updateItemSubtotal(itemRow);
-            updateCartTotal();
-            updateHiddenFields(itemRow);
-        }
-    });
-
-    // Final total update
-    updateCartTotal();
 });
+
 </script>
 @endsection
 

@@ -54,14 +54,14 @@
                 </div>
 
                 <!-- Terms and Conditions Checkbox -->
-                <div class="checkbox">
+                {{-- <div class="checkbox">
                     <label>
                         <input type="checkbox" name="terms" required> I accept the Terms of Use & Privacy Policy.
                         <span class="checkmark"></span>
                         <small id="terms-feedback"  class="form-text"></small> <!-- Feedback Message -->
 
                     </label>
-                </div>
+                </div> --}}
 
                 <!-- Register Button -->
                 <button type="submit" class="btn btn-dark w-100 py-2 rounded-pill">Register Now</button>

@@ -21,9 +21,9 @@ class OrderItemSeeder extends Seeder
         OrderItem::create([
             'order_id' => $order->id,
             'product_id' => $product->id,
-            'color_id' => 1,       // Selected color ID
-            'size_id' => 1,         // Selected size ID
-            'material_id' => 1, // Selected material ID
+            'color_id' => 1,       
+            'size_id' => 1,        
+            'material_id' => 1, 
             'quantity' => 1,
             'price' => $product->price,
         ]);

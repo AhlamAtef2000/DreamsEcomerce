@@ -13,7 +13,7 @@ class ContactController extends Controller
     public function index()
     {
 
-        $contactInfo = ContactInfo::first(); // Get all contact information
+        $contactInfo = ContactInfo::first(); 
         
         return view('frontend.contact.index', compact('contactInfo'));
     }
@@ -25,6 +25,7 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
+      
     
         $request->validate([
             'name' => 'required|string|regex:/^[a-zA-Z]/|max:255',  

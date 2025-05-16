@@ -16,7 +16,12 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = Shipment::all();
+        $shipments = Shipment::with('order')
+            ->whereHas('order', function ($query) {
+                $query->where('user_id', auth()->id());
+            })
+            ->get();
+        // Check if the user has any shipments
         return view('frontend.shipments.index', compact('shipments'));
     }
 

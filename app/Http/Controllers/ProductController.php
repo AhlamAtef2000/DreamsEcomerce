@@ -48,7 +48,7 @@ class ProductController extends Controller
 
            $hasDeliveredOrder = \DB::table('orders')
            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
-           ->where('orders.user_id', Auth::user()->id)
+           ->where('orders.user_id', Auth::user()->id ?? null)
            ->where('orders.status', 'delivered')
            ->where('order_items.product_id', $product->id)
            ->exists();

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Material extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['name'];  // Assuming material has a name like "Cotton", "Polyester"
+    protected $fillable = ['name']; 
     public function products()
     {
         return $this->belongsToMany(Product::class, 'material_id');

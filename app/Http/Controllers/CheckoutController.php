@@ -10,6 +10,11 @@ class CheckoutController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+{
+    $this->middleware(['auth', 'verified']);
+}
+
     public function index()
     {
         $user = auth()->user();
@@ -28,61 +33,4 @@ class CheckoutController extends Controller
         return view('frontend.checkout.index',compact('cartItems'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-     
-    // $validated = $request->validate([
-    //     'first_name' => 'required|alpha|max:255',  
-    //     'last_name' => 'required|alpha|max:255',   
-    //     'address' => 'required|string|max:255',   
-    //     'town_city' => 'required|string|max:255', 
-    //     'state_county' => 'required|string|max:255', 
-    //     'postcode_zip' => 'required|numeric',     
-    //     'email' => 'required|email|max:255',     
-    //     'phone' => 'required|regex:/^07[7-9]{1}[0-9]{7}$/', 
-    // ]);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

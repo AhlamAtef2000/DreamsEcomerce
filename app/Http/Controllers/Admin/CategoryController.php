@@ -80,7 +80,7 @@ class CategoryController extends Controller
     {
         $category = Category::withTrashed()->findOrFail($id);
         $category->forceDelete();
-
+        
         return redirect()->route('admin.categories.index')->with('success', 'Category permanently deleted.');
     }
 }

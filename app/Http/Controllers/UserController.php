@@ -100,7 +100,7 @@ class UserController extends Controller
         // Redirect with success message
     
          // Redirect with success message
-         return redirect()->route('admin.user.index')->with('success', 'User updated successfully!');
+         return redirect()->route('user.user.index')->with('success', 'User updated successfully!');
      }
     /**
      * Remove the specified resource from storage.

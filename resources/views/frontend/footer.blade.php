@@ -45,7 +45,7 @@
                     <div class="single-footer-widget aos-init aos-animate">
                         <h2 class="widget-title">My Account</h2>
                         <ul class="widget-list">
-                            <li><a href="account.html">My Account</a></li>
+                            <li> <a href="{{ route('user.contact.index') }}">My Account</a></li>
                             <li><a href="{{ route('user.favorites.index') }}">Wishlist</a></li>
                             <li><a href="{{ route('user.contact.index') }}">Newsletter</a></li>
                             <li><a href="{{ route('user.contact.index') }}">Help Center</a></li>

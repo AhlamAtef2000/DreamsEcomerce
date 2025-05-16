@@ -41,7 +41,7 @@ class ReviewController extends Controller
 
         $user = auth()->user();
 
-        // تحقق إذا كان المستخدم قد طلب هذا المنتج
+        
         $hasDeliveredOrder = \DB::table('orders')
             ->join('order_items', 'orders.id', '=', 'order_items.order_id')
             ->where('orders.user_id', $user->id)
@@ -53,7 +53,7 @@ class ReviewController extends Controller
             return back()->with('error', 'You can only review products you have received.');
         }
 
-        // تحقق إذا كان المستخدم قد قام بالتقييم مسبقًا
+    
         $alreadyReviewed = Review::where('user_id', $user->id)
             ->where('product_id', $request->product_id)
             ->exists();
@@ -62,7 +62,7 @@ class ReviewController extends Controller
             return back()->with('error', 'You have already reviewed this product.');
         }
 
-        // حفظ التقييم
+      
         Review::create([
             'user_id' => $user->id,
             'product_id' => $request->product_id,

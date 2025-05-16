@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');  // Link to the order
-            $table->string('shipment_status')->default('pending'); // Shipment status (e.g., pending, shipped, delivered)
-            $table->string('tracking_number')->nullable();  // Tracking number (optional)
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade'); 
+            $table->string('shipment_status')->default('pending'); 
+            $table->string('tracking_number')->nullable();  
             $table->text('shipping_address');
-            $table->string('shipping_method')->nullable();  // e.g., standard, expedited
-            $table->decimal('shipping_cost', 10, 2)->default(0); // Cost of shipment
-            $table->timestamp('shipped_at')->nullable();  // Date when the shipment was shipped
-            $table->timestamp('delivered_at')->nullable();  // Date when the shipment was delivered
+            $table->string('shipping_method')->nullable();  
+            $table->decimal('shipping_cost', 10, 2)->default(0); 
+            $table->timestamp('shipped_at')->nullable(); 
+            $table->timestamp('delivered_at')->nullable();  
             $table->timestamps();
         });
     }

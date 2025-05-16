@@ -37,6 +37,7 @@ class HomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(8)
             ->get();
+            
             $bestSellers = Product::with('reviews')
             ->withCount(['orderItems as delivered_orders_count' => function ($query) {
                 $query->whereHas('order', function ($query) {

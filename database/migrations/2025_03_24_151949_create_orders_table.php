@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('email'); // Email Address
             $table->string('phone'); // Phone
             $table->text('order_notes')->nullable(); // Order Notes
-            $table->string('payment_method'); // Payment method (e.g., Direct Bank Transfer, PayPal)
+            $table->string('payment_method');
             $table->foreign('shipping_method_id')->references('id')->on('shipping_methods')->onDelete('cascade');
             $table->unsignedBigInteger('shipping_method_id');
             $table->softDeletes();

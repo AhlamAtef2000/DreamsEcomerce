@@ -71,7 +71,8 @@ Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function
 Route::get('/dashboard', function () {
         return view('dashboard.index');
     })->name('dashboard')->middleware('verified'); // ✅ fixed
-Route::resource('products', ProductController::class);
+Route::resource('products', 
+ProductController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('orders', OrderController::class);
 Route::resource('accessories', AccessoryController::class);
@@ -98,7 +99,7 @@ Route::get('/',[HomeController::class,'index']);
 Route::get('/home', [CartController::class, 'index'])->name('home'); // Home route
 
 
-Route::prefix('user')->name('user.')->middleware(['auth', 'verified'])->group(function () {
+Route::prefix('user')->name('user.')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home'); // Home route
 Route::get('/contact', [ContactInfoController::class, 'showContactInfo'])->name('contact');
 Route::resource('favorites', FavouriteController::class);

@@ -10,7 +10,7 @@ class Color extends Model
 {
     use HasFactory,SoftDeletes;
         // Define fillable fields for mass assignment
-        protected $fillable = ['name'];  // Assuming color has a name and code
+        protected $fillable = ['name']; 
         public function products()
         {
             return $this->belongsToMany(Product::class, 'product_color');
